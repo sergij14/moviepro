@@ -598,6 +598,10 @@ Movie Details
   max-height: 37rem;
 }
 
+.movies__detail__btns {
+  text-align: center;
+}
+
 .movies__detail__genres {
   font-weight: 500;
 }
@@ -785,6 +789,9 @@ Media Queries
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
+  }
+  .movies__detail__btns {
+    text-align: left;
   }
   .movies__detail__img {
     max-width: calc(100% / 12 * 4);

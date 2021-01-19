@@ -236,8 +236,10 @@ const renderClickedMovie = function (movie) {
     )}">${vote}</font></b></span>
     <span class="movies__detail__runtime">Rruntime: <b>${runtime}</b> Min</span>
     <p class="movies__detail__plot mar-tb-1"><b>Overview:</b></b><br>${plot}</p>
-      <a class="movies__detail__imdb-btn mar-tb-05 mar-r-05" target="_blank" href="https://www.imdb.com/title/${imdbID}/">View On IMDB</a>
-      <a class="btn-home" href="./">Main Page</a>
+    <p class="movies__detail__btns">
+    <a class="movies__detail__imdb-btn mar-tb-05 mar-r-05" target="_blank" href="https://www.imdb.com/title/${imdbID}/">View On IMDB</a>
+    <a class="btn-home" href="./">Main Page</a>
+    </p>
     </div>
     </div>
           `
