@@ -11,4 +11,8 @@ $white-darker: #cacaca;
 $black: rgba(0, 0, 0, 0.6);
 $black-darker: rgba(0, 0, 0, 0.8);
 
+$gradient-white: linear-gradient(105deg, #f0f0f0, #cacaca);
+$gradient-primary: linear-gradient(105deg, #ff6363, #cc5252);
+$gradient-secondary: linear-gradient(105deg, #543864, #704888);
+
 $transition-primary: all 350ms ease;

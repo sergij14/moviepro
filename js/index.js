@@ -1,11 +1,11 @@
+import "regenerator-runtime/runtime";
+import "core-js/stable";
+
 //
 // Author: Sergi. J
 //
 
-"use strict";
-
-import "regenerator-runtime/runtime";
-import "core-js/stable";
+("use strict");
 
 ////////////////////////////////////////////////////////
 // API Urls
@@ -117,7 +117,6 @@ const renderMovies = function (movies) {
     const title = movie.title;
     const vote = movie.vote_average;
     const date = movie.release_date;
-    const plot = movie.overview;
     const id = movie.id;
 
     if (
@@ -128,21 +127,109 @@ const renderMovies = function (movies) {
       moviesContainer.insertAdjacentHTML(
         "beforeend",
         `
-  <div class="movies__item" data-id="${id}">
-  <h6 class="movies__item__title">${title}</h6>
-  <div class="movies__item__img">
-  <img src="${imgPath + image}" />
-  <p class="movies__item__plot">${plot}</p>
-  </div>
-  <div class="movies__item__details">
-  <span class="movies__item__date">${date}</span>
-  <span class="movies__item__vote">${vote}</span>
-  </div>
-  </div>
-   `
+        <div class="movies__item" data-id="${id}">
+        <h6 class="movies__item__title">${title}</h6>
+        <img class="movies__item__img" src="${imgPath + image}" />
+        <div class="movies__item__details">
+        <span class="movies__item__date">${date}</span>
+
+        <span class="movies__item__vote" style="color:${checkColor(vote)}">
+        ${vote}
+        </span>
+
+        </div>
+        </div>
+         `
       );
     }
   });
+  clickCheck();
+};
+
+const checkColor = function (vote) {
+  if (vote >= 8) {
+    return "green";
+  } else if (vote > 5) {
+    return "orange";
+  } else {
+    return "red";
+  }
+};
+
+////////////////////////////////////////////////////////
+// Get Clicked Movie
+////////////////////////////////////////////////////////
+
+const clickCheck = function () {
+  const moviesItem = document.querySelectorAll(".movies__item");
+  moviesItem.forEach((item) =>
+    item.addEventListener("click", function (event) {
+      if (event.target.classList.contains("movies__item__img")) {
+        const id = item.dataset.id;
+        getClickedMovie(id);
+      }
+    })
+  );
+};
+
+const getClickedMovie = async function (id) {
+  try {
+    const resp = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=53d1126a0f1a18cf2551da1519c821af`
+    );
+    const data = await resp.json();
+    const movie = data;
+    renderClickedMovie(movie);
+  } catch (error) {
+    moviesTitle.textContent = error;
+    moviesContainer.insertAdjacentHTML(
+      "beforeend",
+      `<a class="btn-home" href="./">Main Page</a>`
+    );
+  }
+};
+
+////////////////////////////////////////////////////////
+// Render Clicked Movie
+////////////////////////////////////////////////////////
+
+const renderClickedMovie = function (movie) {
+  const image = movie.poster_path;
+  const title = movie.title;
+  const vote = movie.vote_average;
+  const date = movie.release_date;
+  const plot = movie.overview;
+  const runtime = movie.runtime;
+  const imdbID = movie.imdb_id;
+  const genres = movie.genres;
+
+  const getGenres = function (genres) {
+    const genreslist = genres.map((genre) => genre.name);
+    return genreslist.join(", ");
+  };
+
+  moviesContainer.innerHTML = "";
+  moviesTitle.textContent = "Movie Details: " + title;
+  moviesContainer.insertAdjacentHTML(
+    "beforeend",
+    `
+    <div class="movies__detail">
+    <div class="movies__detail__img">
+    <img src="${imgPath + image}" />
+    </div>
+    <div class="movies__detail__info">
+    <span class="movies__detail__genres mar-tb-05">${getGenres(genres)}</span>
+    <span class="movies__detail__date">Release Date: <b>${date}</b></span>
+    <span class="movies__detail__vote mar-tb-05">Votes: <b><font style="color:${checkColor(
+      vote
+    )}">${vote}</font></b></span>
+    <span class="movies__detail__runtime">Rruntime: <b>${runtime}</b> Min</span>
+    <p class="movies__detail__plot mar-tb-1"><b>Overview:</b></b><br>${plot}</p>
+      <a class="movies__detail__imdb-btn mar-tb-05" target="_blank" href="https://www.imdb.com/title/${imdbID}/">View On IMDB</a>
+    </div>
+    </div>
+          `
+  );
 };
 
 ////////////////////////////////////////////////////////
@@ -181,4 +268,6 @@ searchForm.addEventListener("submit", (event) => {
 });
 
 ////////////////////////////////////////////////////////
-window.addEventListener("DOMContentLoaded", () => getMovies(apiUrl));
+window.addEventListener("DOMContentLoaded", () => {
+  getMovies(apiUrl);
+});

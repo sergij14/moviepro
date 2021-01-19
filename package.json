@@ -1,14 +1,22 @@
 {
   "name": "moviepro",
   "version": "1.0.0",
-  "description": "",
+  "description": "Movie searching app",
   "main": "index.html",
   "scripts": {
     "dev": "parcel index.html",
     "build": "parcel build index.html"
   },
-  "author": "sergij14",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergij14/moviepro.git"
+  },
+  "author": "sergj14",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sergij14/moviepro/issues"
+  },
+  "homepage": "https://github.com/sergij14/moviepro#readme",
   "devDependencies": {
     "parcel": "^1.12.4"
   },

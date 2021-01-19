@@ -12252,9 +12252,6 @@ var path = require('../internals/path');
 module.exports = path;
 
 },{"../es":"node_modules/core-js/es/index.js","../web":"node_modules/core-js/web/index.js","../internals/path":"node_modules/core-js/internals/path.js"}],"js/index.js":[function(require,module,exports) {
-//
-// Author: Sergi. J
-//
 "use strict";
 
 require("regenerator-runtime/runtime");
@@ -12265,9 +12262,14 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-////////////////////////////////////////////////////////
+//
+// Author: Sergi. J
+//
+"use strict"; ////////////////////////////////////////////////////////
 // API Urls
 ////////////////////////////////////////////////////////
+
+
 var apiUrl = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=53d1126a0f1a18cf2551da1519c821af&page=1";
 var imgPath = "https://image.tmdb.org/t/p/w500";
 var searchUrl = "https://api.themoviedb.org/3/search/movie?api_key=53d1126a0f1a18cf2551da1519c821af&query=";
@@ -12387,13 +12389,105 @@ var renderMovies = function renderMovies(movies) {
     var title = movie.title;
     var vote = movie.vote_average;
     var date = movie.release_date;
-    var plot = movie.overview;
     var id = movie.id;
 
     if (movie.backdrop_path !== null && movie.genre_ids !== [] && movie.overview !== "") {
-      moviesContainer.insertAdjacentHTML("beforeend", "\n  <div class=\"movies__item\" data-id=\"".concat(id, "\">\n  <h6 class=\"movies__item__title\">").concat(title, "</h6>\n  <div class=\"movies__item__img\">\n  <img src=\"").concat(imgPath + image, "\" />\n  <p class=\"movies__item__plot\">").concat(plot, "</p>\n  </div>\n  <div class=\"movies__item__details\">\n  <span class=\"movies__item__date\">").concat(date, "</span>\n  <span class=\"movies__item__vote\">").concat(vote, "</span>\n  </div>\n  </div>\n   "));
+      moviesContainer.insertAdjacentHTML("beforeend", "\n        <div class=\"movies__item\" data-id=\"".concat(id, "\">\n        <h6 class=\"movies__item__title\">").concat(title, "</h6>\n        <img class=\"movies__item__img\" src=\"").concat(imgPath + image, "\" />\n        <div class=\"movies__item__details\">\n        <span class=\"movies__item__date\">").concat(date, "</span>\n\n        <span class=\"movies__item__vote\" style=\"color:").concat(checkColor(vote), "\">\n        ").concat(vote, "\n        </span>\n\n        </div>\n        </div>\n         "));
     }
   });
+  clickCheck();
+};
+
+var checkColor = function checkColor(vote) {
+  if (vote >= 8) {
+    return "green";
+  } else if (vote > 5) {
+    return "orange";
+  } else {
+    return "red";
+  }
+}; ////////////////////////////////////////////////////////
+// Get Clicked Movie
+////////////////////////////////////////////////////////
+
+
+var clickCheck = function clickCheck() {
+  var moviesItem = document.querySelectorAll(".movies__item");
+  moviesItem.forEach(function (item) {
+    return item.addEventListener("click", function (event) {
+      if (event.target.classList.contains("movies__item__img")) {
+        var id = item.dataset.id;
+        getClickedMovie(id);
+      }
+    });
+  });
+};
+
+var getClickedMovie = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(id) {
+    var resp, data, movie;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return fetch("https://api.themoviedb.org/3/movie/".concat(id, "?api_key=53d1126a0f1a18cf2551da1519c821af"));
+
+          case 3:
+            resp = _context2.sent;
+            _context2.next = 6;
+            return resp.json();
+
+          case 6:
+            data = _context2.sent;
+            movie = data;
+            renderClickedMovie(movie);
+            _context2.next = 15;
+            break;
+
+          case 11:
+            _context2.prev = 11;
+            _context2.t0 = _context2["catch"](0);
+            moviesTitle.textContent = _context2.t0;
+            moviesContainer.insertAdjacentHTML("beforeend", "<a class=\"btn-home\" href=\"./\">Main Page</a>");
+
+          case 15:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 11]]);
+  }));
+
+  return function getClickedMovie(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}(); ////////////////////////////////////////////////////////
+// Render Clicked Movie
+////////////////////////////////////////////////////////
+
+
+var renderClickedMovie = function renderClickedMovie(movie) {
+  var image = movie.poster_path;
+  var title = movie.title;
+  var vote = movie.vote_average;
+  var date = movie.release_date;
+  var plot = movie.overview;
+  var runtime = movie.runtime;
+  var imdbID = movie.imdb_id;
+  var genres = movie.genres;
+
+  var getGenres = function getGenres(genres) {
+    var genreslist = genres.map(function (genre) {
+      return genre.name;
+    });
+    return genreslist.join(", ");
+  };
+
+  moviesContainer.innerHTML = "";
+  moviesTitle.textContent = "Movie Details: " + title;
+  moviesContainer.insertAdjacentHTML("beforeend", "\n    <div class=\"movies__detail\">\n    <div class=\"movies__detail__img\">\n    <img src=\"".concat(imgPath + image, "\" />\n    </div>\n    <div class=\"movies__detail__info\">\n    <span class=\"movies__detail__genres mar-tb-05\">").concat(getGenres(genres), "</span>\n    <span class=\"movies__detail__date\">Release Date: <b>").concat(date, "</b></span>\n    <span class=\"movies__detail__vote mar-tb-05\">Votes: <b><font style=\"color:").concat(checkColor(vote), "\">").concat(vote, "</font></b></span>\n    <span class=\"movies__detail__runtime\">Rruntime: <b>").concat(runtime, "</b> Min</span>\n    <p class=\"movies__detail__plot mar-tb-1\"><b>Overview:</b></b><br>").concat(plot, "</p>\n      <a class=\"movies__detail__imdb-btn mar-tb-05\" target=\"_blank\" href=\"https://www.imdb.com/title/").concat(imdbID, "/\">View On IMDB</a>\n    </div>\n    </div>\n          "));
 }; ////////////////////////////////////////////////////////
 // Movie Categories
 ////////////////////////////////////////////////////////
@@ -12430,7 +12524,7 @@ searchForm.addEventListener("submit", function (event) {
 }); ////////////////////////////////////////////////////////
 
 window.addEventListener("DOMContentLoaded", function () {
-  return getMovies(apiUrl);
+  getMovies(apiUrl);
 });
 },{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","core-js/stable":"node_modules/core-js/stable/index.js"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -12460,7 +12554,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55079" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52722" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

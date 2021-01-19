@@ -296,7 +296,7 @@ a:hover {
 a:active,
 a:hover,
 a:focus {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 h1,
@@ -351,7 +351,6 @@ p {
 .btn-home:focus,
 .btn-home:hover {
   background: #ffffff;
-  text-decoration: none;
 }
 
 /*
@@ -361,7 +360,7 @@ Container
 */
 .container {
   width: 100%;
-  max-width: 1920px;
+  max-width: 1470px;
   margin: 0 auto;
   padding: 0 2em;
 }
@@ -407,7 +406,7 @@ Nav
 }
 
 .nav__search__input {
-  background: #cacaca;
+  background: linear-gradient(105deg, #f0f0f0, #cacaca);
   border: none;
   outline: 0;
   color: #ff6363;
@@ -438,14 +437,9 @@ Nav
   height: 6rem;
   line-height: 6rem;
   padding: 0 0.3em;
-  background: #ff6363;
+  background: linear-gradient(105deg, #ff6363, #cc5252);
   -webkit-transition: all 350ms ease;
   transition: all 350ms ease;
-}
-
-.nav__logo a:hover,
-.nav__logo a:focus {
-  text-decoration: none;
 }
 
 .nav__ham-btn {
@@ -473,14 +467,13 @@ Nav
   font-size: 1.8rem;
   font-weight: 500;
   padding: 0.5em 1em;
-  background: #cacaca;
+  background: linear-gradient(105deg, #f0f0f0, #cacaca);
   color: #202040;
 }
 
 .nav__menu a:hover,
 .nav__menu a:focus {
   background: #ffffff;
-  text-decoration: none;
 }
 
 /*
@@ -531,38 +524,33 @@ main .container {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-transition: all 350ms ease;
+  transition: all 350ms ease;
 }
 
 .movies__item__img {
-  position: relative;
+  -webkit-transition: all 350ms ease;
+  transition: all 350ms ease;
+  opacity: 0.8;
+  cursor: pointer;
+  height: 100vh;
+  width: 100vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 50% 0%;
+     object-position: 50% 0%;
+  max-height: 37rem;
+}
+
+.movies__item:hover .movies__item__img {
+  opacity: 1;
 }
 
 .movies__item__title {
-  background: #ffffff;
+  background: linear-gradient(105deg, #f0f0f0, #cacaca);
   padding: 1em;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
   color: #ff6363;
   text-align: center;
-}
-
-.movies__item__plot {
-  opacity: 0;
-  visibility: hidden;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  -webkit-transition: all 350ms ease;
-  transition: all 350ms ease;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 1em;
-}
-
-.movies__item__img:hover .movies__item__plot {
-  opacity: 1;
-  visibility: visible;
-  position: absolute;
 }
 
 .movies__item__details {
@@ -573,9 +561,62 @@ main .container {
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 1em;
-  background: #ffffff;
-  color: #ff6363;
+  background: #16162c;
   font-weight: 500;
+}
+
+/*
+==============================
+Movie Details
+==============================
+*/
+.movies__detail {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 1em;
+  padding: 1em;
+  background: #16162c;
+  color: #ffffff;
+  font-size: 1.8rem;
+}
+
+.movies__detail__info,
+.movies__detail__img {
+  padding: 0.5em;
+}
+
+.movies__detail__img img {
+  width: 100vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 50% 0%;
+     object-position: 50% 0%;
+  max-height: 37rem;
+}
+
+.movies__detail__genres {
+  font-weight: 500;
+}
+
+.movies__detail__info span {
+  display: block;
+}
+
+.movies__detail__imdb-btn {
+  background: linear-gradient(105deg, #ff6363, #cc5252);
+  padding: 1em;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.movies__detail__imdb-btn:hover,
+.movies__detail__imdb-btn:focus {
+  background: linear-gradient(105deg, #543864, #704888);
 }
 
 /*
@@ -655,7 +696,8 @@ Utilities
 Media Queries
 ==============================
 */
-@media screen and (min-width: 830px) {
+/* Movie Items */
+@media screen and (min-width: 630px) {
   .movies__item {
     max-width: calc(100% / 12 * 6);
     -webkit-box-flex: 0;
@@ -664,7 +706,7 @@ Media Queries
   }
 }
 
-@media screen and (min-width: 1050px) {
+@media screen and (min-width: 850px) {
   .movies__item {
     max-width: calc(100% / 12 * 4);
     -webkit-box-flex: 0;
@@ -673,7 +715,7 @@ Media Queries
   }
 }
 
-@media screen and (min-width: 1490px) {
+@media screen and (min-width: 1390px) {
   .movies__item {
     max-width: calc(100% / 12 * 3);
     -webkit-box-flex: 0;
@@ -682,6 +724,85 @@ Media Queries
   }
 }
 
+/* Movie Item Image */
+@media screen and (min-width: 480px) {
+  .movies__item__img {
+    max-height: 42rem;
+  }
+}
+
+@media screen and (min-width: 520px) {
+  .movies__item__img {
+    max-height: 46rem;
+  }
+}
+
+@media screen and (min-width: 630px) {
+  .movies__item__img {
+    max-height: 30rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .movies__item__img {
+    max-height: 40rem;
+  }
+}
+
+/* Movie Details Image */
+@media screen and (min-width: 500px) {
+  .movies__detail__img img {
+    max-height: 44rem;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .movies__detail__img img {
+    max-height: 58rem;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .movies__detail__img img {
+    max-height: 64rem;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .movies__detail__img img {
+    max-height: 77rem;
+  }
+}
+
+/* Movie Details */
+@media screen and (min-width: 880px) {
+  .movies__detail {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .movies__detail__img {
+    max-width: calc(100% / 12 * 4);
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(100% / 12 * 4);
+            flex: 0 0 calc(100% / 12 * 4);
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+  .movies__detail__info {
+    max-width: calc(100% / 12 * 8);
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(100% / 12 * 8);
+            flex: 0 0 calc(100% / 12 * 8);
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+}
+
+/* Navigation & Search Form */
 @media screen and (max-width: 1120px) {
   .nav__container {
     display: -webkit-box;
@@ -706,7 +827,7 @@ Media Queries
     font-size: 2.4rem;
     font-weight: 500;
     padding: 0.5em;
-    background: #cacaca;
+    background: linear-gradient(105deg, #f0f0f0, #cacaca);
     color: #202040;
     border: none;
     outline: 0;
@@ -772,7 +893,7 @@ Media Queries
     font-size: 2.4rem;
     font-weight: 500;
     padding: 0.5em;
-    background: #cacaca;
+    background: linear-gradient(105deg, #f0f0f0, #cacaca);
     color: #202040;
     border: none;
     outline: 0;
