@@ -1,0 +1,542 @@
+/*
+==============================
+Author: Sergi. J
+==============================
+*/
+
+@import "./reset";
+@import "./base";
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;900&display=swap");
+
+/*
+==============================
+Global
+==============================
+*/
+
+html {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-size: 10px;
+  font-family: "Poppins", Verdana, Tahoma, sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: $white;
+  background: $tertiary;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: $white;
+}
+
+a:link,
+a:active,
+a:visited,
+a:focus,
+a:hover {
+  text-decoration: none;
+}
+
+a:active,
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 900;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: 3.7rem;
+}
+
+h2 {
+  font-size: 3.4rem;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+h4 {
+  font-size: 2.7rem;
+}
+
+h5 {
+  font-size: 2.4rem;
+}
+
+h6 {
+  font-size: 2.2rem;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+.btn-home {
+  background: $white-darker;
+  padding: 0.5em 1em;
+  color: $tertiary-darker;
+  cursor: pointer;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.btn-home:focus,
+.btn-home:hover {
+  background: $white;
+  text-decoration: none;
+}
+
+/*
+==============================
+Container
+==============================
+*/
+
+.container {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 2em;
+}
+
+/*
+==============================
+Nav
+==============================
+*/
+
+.nav {
+  background: $secondary;
+}
+
+.nav__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  height: 14rem;
+}
+
+.nav__search-btn {
+  display: none;
+}
+
+.nav__search {
+  padding: 0;
+  margin: 0;
+  max-width: calc(100% / 12 * 5);
+  flex: 0 0 calc(100% / 12 * 5);
+}
+
+.nav__search__form {
+  width: 80%;
+}
+
+.nav__search__input {
+  background: $white-darker;
+  border: none;
+  outline: 0;
+  color: $primary;
+  padding: 0.5em 0.7em;
+  width: 100%;
+  font-size: inherit;
+  font-weight: 500;
+}
+
+.nav__search__input:focus {
+  background: $white;
+}
+
+.nav__logo {
+  max-width: calc(100% / 12 * 2);
+  flex: 0 0 calc(100% / 12 * 2);
+  text-align: center;
+  transition: $transition-primary;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.nav__logo a {
+  display: inline-block;
+  height: 6rem;
+  line-height: 6rem;
+  padding: 0 0.3em;
+  background: $primary;
+  transition: $transition-primary;
+}
+
+.nav__logo a:hover,
+.nav__logo a:focus {
+  text-decoration: none;
+}
+
+.nav__ham-btn {
+  display: none;
+}
+
+.nav__menu {
+  display: flex;
+  max-width: calc(100% / 12 * 5);
+  flex: 0 0 calc(100% / 12 * 5);
+  justify-content: flex-end;
+}
+
+.nav__menu > * {
+  margin-left: 1em;
+}
+
+.nav__menu a {
+  font-size: 1.8rem;
+  font-weight: 500;
+  padding: 0.5em 1em;
+  background: $white-darker;
+  color: $tertiary;
+}
+
+.nav__menu a:hover,
+.nav__menu a:focus {
+  background: $white;
+  text-decoration: none;
+}
+
+/*
+==============================
+Movies
+==============================
+*/
+
+main .container {
+  transition: $transition-primary;
+}
+
+.container--moved-bottom {
+  transform: translateY(10rem);
+  transition: $transition-primary;
+}
+
+.movies-title {
+  text-align: center;
+}
+
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 -1em;
+  transition: $transition-primary;
+}
+
+.movies__item {
+  flex: 0 0 100%;
+  max-width: 100%;
+  display: flex;
+  padding: 1em;
+  flex-direction: column;
+}
+
+.movies__item__img {
+  position: relative;
+}
+
+.movies__item__title {
+  background: $white;
+  padding: 1em;
+  flex-grow: 1;
+  color: $primary;
+  text-align: center;
+}
+
+.movies__item__plot {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: $transition-primary;
+  background: $black-darker;
+  padding: 1em;
+}
+
+.movies__item__img:hover .movies__item__plot {
+  opacity: 1;
+  visibility: visible;
+  position: absolute;
+}
+
+.movies__item__details {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  background: $white;
+  color: $primary;
+  font-weight: 500;
+}
+
+/*
+==============================
+Footer
+==============================
+*/
+
+.footer {
+  background: $tertiary-darker;
+  text-align: center;
+  transition: $transition-primary;
+}
+
+.footer--moved-bottom {
+  transform: translateY(10rem);
+  transition: $transition-primary;
+}
+
+/*
+==============================
+Utilities
+==============================
+*/
+
+.pad-tb-1 {
+  padding: 1em 0;
+}
+
+.pad-tb-2 {
+  padding: 2em 0;
+}
+
+.pad-2 {
+  padding: 2em;
+}
+
+.pad-b-2 {
+  padding-bottom: 2em;
+}
+
+.pad-t-1 {
+  padding-top: 1em;
+}
+
+.pad-t-2 {
+  padding-top: 2em;
+}
+
+.pad-t-6 {
+  padding-top: 12em;
+}
+
+.mar-tb-05 {
+  margin: 0.5em 0;
+}
+
+.mar-tb-1 {
+  margin: 1em 0;
+}
+
+.mar-tb-2 {
+  margin: 2em 0;
+}
+
+.mar-t-4 {
+  margin-top: 4em;
+}
+
+.mar-t-2 {
+  margin-top: 2em;
+}
+
+/*
+==============================
+Media Queries
+==============================
+*/
+
+@media screen and (min-width: 830px) {
+  .movies__item {
+    max-width: calc(100% / 12 * 6);
+    flex: 0 0 calc(100% / 12 * 6);
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  .movies__item {
+    max-width: calc(100% / 12 * 4);
+    flex: 0 0 calc(100% / 12 * 4);
+  }
+}
+
+@media screen and (min-width: 1490px) {
+  .movies__item {
+    max-width: calc(100% / 12 * 3);
+    flex: 0 0 calc(100% / 12 * 3);
+  }
+}
+
+@media screen and (max-width: 1120px) {
+  .nav__container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .nav__search-btn {
+    display: flex;
+    justify-content: flex-start;
+    max-width: calc(100% / 12 * 4);
+    flex: 0 0 calc(100% / 12 * 4);
+  }
+
+  .nav__search-btn button {
+    font-size: 2.4rem;
+    font-weight: 500;
+    padding: 0.5em;
+    background: $white-darker;
+    color: $tertiary;
+    border: none;
+    outline: 0;
+    height: 6rem;
+    width: 5rem;
+    cursor: pointer;
+  }
+
+  .nav__search-btn button:hover,
+  .nav__search-btn button:focus {
+    background: $white;
+  }
+
+  .nav__search {
+    position: absolute;
+    left: 0;
+    top: 14rem;
+    transform: translateY(-250%);
+    opacity: 0;
+    visibility: hidden;
+    transition: $transition-primary;
+    background: $tertiary-darker;
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+    z-index: 1999;
+    padding: 1.5em;
+  }
+
+  .nav__search__form {
+    width: 100%;
+  }
+
+  .nav__search__input {
+    height: 6rem;
+    text-align: center;
+  }
+
+  .nav__search--show {
+    transform: translateY(0%);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav__logo {
+    max-width: calc(100% / 12 * 4);
+    flex: 0 0 calc(100% / 12 * 4);
+  }
+
+  .nav__ham-btn {
+    display: flex;
+    justify-content: flex-end;
+    max-width: calc(100% / 12 * 4);
+    flex: 0 0 calc(100% / 12 * 4);
+  }
+
+  .nav__ham-btn button {
+    font-size: 2.4rem;
+    font-weight: 500;
+    padding: 0.5em;
+    background: $white-darker;
+    color: $tertiary;
+    border: none;
+    outline: 0;
+    height: 6rem;
+    width: 5rem;
+    cursor: pointer;
+  }
+
+  .nav__ham-btn button:hover,
+  .nav__ham-btn button:focus {
+    background: $white;
+  }
+
+  .nav__menu {
+    position: absolute;
+    right: 0;
+    top: 14rem;
+    min-height: 40vh;
+    max-height: 70vh;
+    transform: translateY(-250%);
+    opacity: 0;
+    visibility: hidden;
+    transition: $transition-primary;
+    background: $white;
+    padding: 1em 2em;
+    z-index: 999;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+
+  .nav__menu > * {
+    margin: 0;
+  }
+
+  .nav__menu a {
+    font-size: 2rem;
+  }
+
+  .nav__menu a:focus,
+  .nav__menu a:hover {
+    background: $primary;
+    color: $white;
+  }
+
+  .nav__menu--show {
+    transform: translateY(0%);
+    opacity: 1;
+    visibility: visible;
+  }
+}
