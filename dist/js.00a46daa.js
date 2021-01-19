@@ -12283,7 +12283,6 @@ var searchForm = document.querySelector(".nav__search__form");
 var searchInput = document.querySelector(".nav__search__input");
 var popMovies = document.querySelector("#pop-movies");
 var dramaMovies = document.querySelector("#drama-movies");
-var tenMovies = document.querySelector("#ten-movies");
 var highGrossMovies = document.querySelector("#high-gross-movies");
 var moviesContainer = document.querySelector(".movies");
 var mainContainer = document.querySelector("main .container");
@@ -12554,7 +12553,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52722" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59873" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

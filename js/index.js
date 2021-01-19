@@ -30,7 +30,6 @@ const searchInput = document.querySelector(".nav__search__input");
 
 const popMovies = document.querySelector("#pop-movies");
 const dramaMovies = document.querySelector("#drama-movies");
-const tenMovies = document.querySelector("#ten-movies");
 const highGrossMovies = document.querySelector("#high-gross-movies");
 
 const moviesContainer = document.querySelector(".movies");
