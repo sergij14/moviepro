@@ -12395,7 +12395,10 @@ var renderMovies = function renderMovies(movies) {
     }
   });
   clickCheck();
-};
+}; ////////////////////////////////////////////////////////
+// Helper Functions
+////////////////////////////////////////////////////////
+
 
 var checkColor = function checkColor(vote) {
   if (vote >= 8) {
@@ -12405,6 +12408,10 @@ var checkColor = function checkColor(vote) {
   } else {
     return "red";
   }
+};
+
+var loadMsg = function loadMsg() {
+  moviesContainer.insertAdjacentHTML("beforeend", "<h6><i class=\"fas fa-spinner\"></i></h6>");
 }; ////////////////////////////////////////////////////////
 // Get Clicked Movie
 ////////////////////////////////////////////////////////
@@ -12522,6 +12529,7 @@ searchForm.addEventListener("submit", function (event) {
   }
 }); ////////////////////////////////////////////////////////
 
+loadMsg();
 window.addEventListener("DOMContentLoaded", function () {
   getMovies(apiUrl);
 });
@@ -12553,7 +12561,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59873" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65364" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

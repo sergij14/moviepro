@@ -636,6 +636,7 @@ Footer
           transform: translateY(10rem);
   -webkit-transition: all 350ms ease;
   transition: all 350ms ease;
+  margin-bottom: 10rem;
 }
 
 /*

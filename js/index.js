@@ -145,7 +145,11 @@ const renderMovies = function (movies) {
   clickCheck();
 };
 
-const checkColor = function (vote) {
+////////////////////////////////////////////////////////
+// Helper Functions
+////////////////////////////////////////////////////////
+
+const checkColor = (vote) => {
   if (vote >= 8) {
     return "green";
   } else if (vote > 5) {
@@ -153,6 +157,13 @@ const checkColor = function (vote) {
   } else {
     return "red";
   }
+};
+
+const loadMsg = () => {
+  moviesContainer.insertAdjacentHTML(
+    "beforeend",
+    `<h6><i class="fas fa-spinner"></i></h6>`
+  );
 };
 
 ////////////////////////////////////////////////////////
@@ -267,6 +278,7 @@ searchForm.addEventListener("submit", (event) => {
 });
 
 ////////////////////////////////////////////////////////
+loadMsg();
 window.addEventListener("DOMContentLoaded", () => {
   getMovies(apiUrl);
 });
