@@ -110,12 +110,11 @@ p {
 }
 
 .btn-home {
-  background: $white-darker;
-  padding: 0.5em 1em;
-  color: $tertiary-darker;
-  cursor: pointer;
+  background: $gradient-white;
+  padding: 1em;
   font-weight: 500;
   display: inline-block;
+  color: $tertiary-darker;
 }
 
 .btn-home:focus,
@@ -414,6 +413,10 @@ Utilities
 
 .mar-t-2 {
   margin-top: 2em;
+}
+
+.mar-r-05 {
+  margin-right: 0.5em;
 }
 
 /*

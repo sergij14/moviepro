@@ -340,12 +340,11 @@ p {
 }
 
 .btn-home {
-  background: #cacaca;
-  padding: 0.5em 1em;
-  color: #16162c;
-  cursor: pointer;
+  background: linear-gradient(105deg, #f0f0f0, #cacaca);
+  padding: 1em;
   font-weight: 500;
   display: inline-block;
+  color: #16162c;
 }
 
 .btn-home:focus,
@@ -690,6 +689,10 @@ Utilities
 
 .mar-t-2 {
   margin-top: 2em;
+}
+
+.mar-r-05 {
+  margin-right: 0.5em;
 }
 
 /*
