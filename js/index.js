@@ -95,7 +95,6 @@ const getMovies = async function (url) {
     const resp = await fetch(url);
     const data = await resp.json();
     const movies = data.results;
-    console.log(movies);
     renderMovies(movies);
     if (!movies.length > 0) throw new Error("Nothing Found");
   } catch (error) {

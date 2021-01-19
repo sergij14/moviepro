@@ -12345,32 +12345,31 @@ var getMovies = /*#__PURE__*/function () {
           case 6:
             data = _context.sent;
             movies = data.results;
-            console.log(movies);
             renderMovies(movies);
 
             if (!(!movies.length > 0)) {
-              _context.next = 12;
+              _context.next = 11;
               break;
             }
 
             throw new Error("Nothing Found");
 
-          case 12:
-            _context.next = 18;
+          case 11:
+            _context.next = 17;
             break;
 
-          case 14:
-            _context.prev = 14;
+          case 13:
+            _context.prev = 13;
             _context.t0 = _context["catch"](0);
             moviesTitle.textContent = _context.t0;
             moviesContainer.insertAdjacentHTML("beforeend", "<a class=\"btn-home\" href=\"./\">Main Page</a>");
 
-          case 18:
+          case 17:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 14]]);
+    }, _callee, null, [[0, 13]]);
   }));
 
   return function getMovies(_x) {
@@ -12461,7 +12460,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50826" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55079" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
