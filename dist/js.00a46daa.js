@@ -12494,7 +12494,7 @@ var renderClickedMovie = function renderClickedMovie(movie) {
 
   moviesContainer.innerHTML = "";
   moviesTitle.textContent = "Movie Details: " + title;
-  moviesContainer.insertAdjacentHTML("beforeend", "\n    <div class=\"movies__detail\">\n    <div class=\"movies__detail__img\">\n    <img src=\"".concat(imgPath + image, "\" />\n    </div>\n    <div class=\"movies__detail__info\">\n    <span class=\"movies__detail__genres mar-tb-05\">").concat(getGenres(genres), "</span>\n    <span class=\"movies__detail__date\">Release Date: <b>").concat(date, "</b></span>\n    <span class=\"movies__detail__vote mar-tb-05\">Votes: <b><font style=\"color:").concat(checkColor(vote), "\">").concat(vote, "</font></b></span>\n    <span class=\"movies__detail__runtime\">Rruntime: <b>").concat(runtime, "</b> Min</span>\n    <p class=\"movies__detail__plot mar-tb-1\"><b>Overview:</b></b><br>").concat(plot, "</p>\n    <p class=\"movies__detail__btns\">\n    <a class=\"movies__detail__imdb-btn mar-tb-05 mar-r-05\" target=\"_blank\" href=\"https://www.imdb.com/title/").concat(imdbID, "/\">View On IMDB</a>\n    <a class=\"btn-home\" href=\"./\">Main Page</a>\n    </p>\n    </div>\n    </div>\n          "));
+  moviesContainer.insertAdjacentHTML("beforeend", "\n    <div class=\"movies__detail\">\n    <div class=\"movies__detail__img\">\n    <img src=\"".concat(imgPath + image, "\" />\n    </div>\n    <div class=\"movies__detail__info\">\n    <span class=\"movies__detail__genres mar-tb-05\">").concat(getGenres(genres), "</span>\n    <span class=\"movies__detail__date\">Release Date: <b>").concat(date, "</b></span>\n    <span class=\"movies__detail__vote mar-tb-05\">Votes: <b><font style=\"color:").concat(checkColor(vote), "\">").concat(vote, "</font></b></span>\n    <span class=\"movies__detail__runtime\">Rruntime: <b>").concat(runtime, "</b> Min</span>\n    <p class=\"movies__detail__plot mar-tb-1\"><b>Overview:</b></b><br>").concat(plot, "</p>\n    <p class=\"movies__detail__btns\">\n    <a class=\"movies__detail__imdb-btn mar-tb-1 mar-r-05\" target=\"_blank\" href=\"https://www.imdb.com/title/").concat(imdbID, "/\">View On IMDB</a>\n    <a class=\"btn-home\" href=\"./\">Main Page</a>\n    </p>\n    </div>\n    </div>\n          "));
 }; ////////////////////////////////////////////////////////
 // Movie Categories
 ////////////////////////////////////////////////////////
@@ -12562,7 +12562,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54420" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54460" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
