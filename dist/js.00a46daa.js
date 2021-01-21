@@ -12252,6 +12252,9 @@ var path = require('../internals/path');
 module.exports = path;
 
 },{"../es":"node_modules/core-js/es/index.js","../web":"node_modules/core-js/web/index.js","../internals/path":"node_modules/core-js/internals/path.js"}],"js/index.js":[function(require,module,exports) {
+//
+// Author: Sergi. J
+//
 "use strict";
 
 require("regenerator-runtime/runtime");
@@ -12262,14 +12265,9 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-// Author: Sergi. J
-//
-"use strict"; ////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
 // API Urls
 ////////////////////////////////////////////////////////
-
-
 var apiUrl = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=53d1126a0f1a18cf2551da1519c821af&page=1";
 var imgPath = "https://image.tmdb.org/t/p/w500";
 var searchUrl = "https://api.themoviedb.org/3/search/movie?api_key=53d1126a0f1a18cf2551da1519c821af&query=";
@@ -12285,7 +12283,6 @@ var popMovies = document.querySelector("#pop-movies");
 var dramaMovies = document.querySelector("#drama-movies");
 var highGrossMovies = document.querySelector("#high-gross-movies");
 var moviesContainer = document.querySelector(".movies");
-var mainContainer = document.querySelector("main .container");
 var moviesTitle = document.querySelector(".movies-title");
 var search = document.querySelector(".nav__search");
 var searchBtn = document.querySelector(".nav__search-btn");
@@ -12294,20 +12291,26 @@ var hamBtn = document.querySelector(".nav__ham-btn");
 var hamBtnIcon = document.querySelector(".nav__ham-btn button i");
 var menu = document.querySelector(".nav__menu");
 var menuLinks = document.querySelectorAll(".nav__menu a");
-var footer = document.querySelector(".footer"); ////////////////////////////////////////////////////////
+var favContent = document.querySelector(".favorites__content");
+var favItemsContainer = document.querySelector(".favorites__container");
+var favBtnContainer = document.querySelector(".favorites__btn");
+var favBtn = document.querySelector(".favorites__btn button");
+var favBtnIcon = document.querySelector(".favorites__btn button i");
+var footer = document.querySelector(".footer");
+var favItems = []; ////////////////////////////////////////////////////////
 // Navigation & Search Form
 ////////////////////////////////////////////////////////
 
 var showSearch = function showSearch() {
-  mainContainer.classList.toggle("container--moved-bottom");
-  footer.classList.toggle("footer--moved-bottom");
   search.classList.toggle("nav__search--show");
   searchBtnIcon.classList.toggle("fa-times");
+  favContent.classList.toggle("favorites--moved-y");
 };
 
 var showNav = function showNav() {
   menu.classList.toggle("nav__menu--show");
   hamBtnIcon.classList.toggle("fa-times");
+  favContent.classList.toggle("favorites--moved-x");
 };
 
 var outSideClick = function outSideClick(event) {
@@ -12315,6 +12318,10 @@ var outSideClick = function outSideClick(event) {
     showNav();
   } else if (search.classList.contains("nav__search--show") && !searchBtn.contains(event.target) && !searchInput.contains(event.target) && !event.target.closest(".nav__search")) {
     showSearch();
+  } else if (favItemsContainer.classList.contains("favorites__container--show") && !favBtn.contains(event.target) && !event.target.closest(".favorites__container") && !event.target.classList.contains("movies__item__fav")) {
+    showFav();
+  } else if (favItemsContainer.classList.contains("fav-show")) {
+    showFav();
   }
 };
 
@@ -12324,6 +12331,16 @@ menuLinks.forEach(function (link) {
   return link.addEventListener("click", showNav);
 });
 document.addEventListener("click", outSideClick); ////////////////////////////////////////////////////////
+// Fav Items
+////////////////////////////////////////////////////////
+
+var showFav = function showFav() {
+  favItemsContainer.classList.toggle("favorites__container--show");
+  favBtnIcon.classList.toggle("fa-times");
+  favItemsContainer.classList.remove("fav-show");
+};
+
+favBtn.addEventListener("click", showFav); ////////////////////////////////////////////////////////
 // Getting Movies
 ////////////////////////////////////////////////////////
 
@@ -12391,10 +12408,11 @@ var renderMovies = function renderMovies(movies) {
     var id = movie.id;
 
     if (movie.backdrop_path !== null && movie.genre_ids !== [] && movie.overview !== "") {
-      moviesContainer.insertAdjacentHTML("beforeend", "\n        <div class=\"movies__item\" data-id=\"".concat(id, "\">\n        <h6 class=\"movies__item__title\">").concat(title, "</h6>\n        <img class=\"movies__item__img\" src=\"").concat(imgPath + image, "\" />\n        <div class=\"movies__item__details\">\n        <span class=\"movies__item__date\">").concat(date, "</span>\n\n        <span class=\"movies__item__vote\" style=\"color:").concat(checkColor(vote), "\">\n        ").concat(vote, "\n        </span>\n\n        </div>\n        </div>\n         "));
+      moviesContainer.insertAdjacentHTML("beforeend", "\n        <div class=\"movies__item\" data-id=\"".concat(id, "\">\n        <h6 class=\"movies__item__title\">").concat(title, "</h6>\n         <div class=\"movies__item__img-container\">\n         <img class=\"movies__item__img\" src=\"").concat(imgPath + image, "\" />\n         <button class=\"movies__item__fav\" data-id=\"").concat(id, "\">\n         Add To Favorites\n         </button>\n         </div>\n        <div class=\"movies__item__details\">\n        <span class=\"movies__item__date\">").concat(date, "</span>\n        <span class=\"movies__item__vote\" style=\"color:").concat(checkColor(vote), "\">\n        ").concat(vote, "\n        </span>\n\n        </div>\n        </div>\n         "));
     }
   });
   clickCheck();
+  btnCheck();
 }; ////////////////////////////////////////////////////////
 // Helper Functions
 ////////////////////////////////////////////////////////
@@ -12421,10 +12439,30 @@ var clickCheck = function clickCheck() {
   var moviesItem = document.querySelectorAll(".movies__item");
   moviesItem.forEach(function (item) {
     return item.addEventListener("click", function (event) {
+      var id = item.dataset.id;
+
       if (event.target.classList.contains("movies__item__img")) {
-        var id = item.dataset.id;
-        window.scroll(0, 140);
+        window.scroll(0, 0);
         getClickedMovie(id);
+      }
+    });
+  });
+  var btns = document.querySelectorAll(".movies__item__fav");
+  btns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.dataset.id.toString();
+      btn.textContent = "In Favorites";
+      btn.setAttribute("disabled", true);
+
+      if (!favItems.includes(id)) {
+        favItems.push(id);
+        fetchFavItem(id);
+        addToStorage(favItems);
+        favItemsContainer.scroll(0, 0);
+
+        if (!favItemsContainer.classList.contains("fav-show") && !favItemsContainer.classList.contains("favorites__container--show")) {
+          favItemsContainer.classList.toggle("fav-show");
+        }
       }
     });
   });
@@ -12471,6 +12509,124 @@ var getClickedMovie = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }(); ////////////////////////////////////////////////////////
+// Add to Favorites
+////////////////////////////////////////////////////////
+
+
+var btnCheck = function btnCheck() {
+  var btns = document.querySelectorAll(".movies__item__fav");
+  btns.forEach(function (btn) {
+    if (favItems.includes(btn.dataset.id)) {
+      btn.textContent = "In Favorites";
+      btn.setAttribute("disabled", true);
+    } else {
+      btn.textContent = "Add to Favorites";
+      btn.removeAttribute("disabled");
+    }
+  });
+};
+
+var addToStorage = function addToStorage(favItems) {
+  localStorage.setItem("favs", favItems);
+};
+
+var getFavItems = function getFavItems() {
+  var favItemsLC = localStorage.getItem("favs");
+
+  if (favItemsLC) {
+    favItems = favItemsLC.split(",");
+    favItems.forEach(function (item) {
+      fetchFavItem(item);
+    });
+  }
+};
+
+var fetchFavItem = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id) {
+    var resp, data, movie;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.next = 3;
+            return fetch("https://api.themoviedb.org/3/movie/".concat(id, "?api_key=53d1126a0f1a18cf2551da1519c821af"));
+
+          case 3:
+            resp = _context3.sent;
+            _context3.next = 6;
+            return resp.json();
+
+          case 6:
+            data = _context3.sent;
+            movie = data;
+            renderFavItem(movie);
+            _context3.next = 15;
+            break;
+
+          case 11:
+            _context3.prev = 11;
+            _context3.t0 = _context3["catch"](0);
+            moviesTitle.textContent = _context3.t0;
+            moviesContainer.insertAdjacentHTML("beforeend", "<a class=\"btn-home\" href=\"./\">Main Page</a>");
+
+          case 15:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[0, 11]]);
+  }));
+
+  return function fetchFavItem(_x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+var renderFavItem = function renderFavItem(movie) {
+  var image = movie.poster_path;
+  var title = movie.title;
+  var date = movie.release_date;
+  var id = movie.id;
+  favItemsContainer.insertAdjacentHTML("afterbegin", "\n  <div class=\"favorites__item\" data-id=\"".concat(id, "\">\n  <img class=\"favorites__item__img\" src=\"").concat(imgPath + image, "\" />\n\n<div class=\"favorites__item__info\">\n<p>\n<span class=\"favorites__item__title\">").concat(title, "</span>\n<span>").concat(date, "</span>\n<button class=\"favorites__item__remove-btn\" data-id=\"").concat(id, "\">Remove</button>\n</div>\n\n  </div>\n  "));
+  favClickCheck();
+};
+
+var favClickCheck = function favClickCheck() {
+  var moviesItem = document.querySelectorAll(".favorites__item");
+  moviesItem.forEach(function (item) {
+    return item.addEventListener("click", function (event) {
+      var id = item.dataset.id;
+
+      if (event.target.classList.contains("favorites__item__img")) {
+        getClickedMovie(id);
+        window.scroll(0, 0);
+        favItemsContainer.classList.remove("favorites__container--show");
+        favItemsContainer.classList.remove("fav-show");
+      }
+
+      if (event.target.classList.contains("favorites__item__remove-btn")) {
+        var btn = event.target;
+        var clickedItem = btn.parentElement.parentElement.parentElement;
+        id = id.toString();
+        favItems = favItems.filter(function (item) {
+          return item !== id;
+        });
+        addToStorage(favItems);
+        setTimeout(function () {
+          if (clickedItem.parentNode) {
+            favItemsContainer.removeChild(btn.parentElement.parentElement.parentElement);
+
+            if (!favItemsContainer.firstElementChild) {
+              showFav();
+            }
+          }
+        }, 0);
+        btnCheck();
+      }
+    });
+  });
+}; ////////////////////////////////////////////////////////
 // Render Clicked Movie
 ////////////////////////////////////////////////////////
 
@@ -12504,14 +12660,17 @@ nav.addEventListener("click", function (event) {
   if (event.target === popMovies) {
     getMovies(apiUrl);
     moviesTitle.textContent = "Popular Movies";
+    window.scroll(0, 0);
   } else if (event.target === dramaMovies) {
     event.preventDefault();
     getMovies(dramaMoviesUrl);
     moviesTitle.textContent = "Drama Movies";
+    window.scroll(0, 0);
   } else if (event.target === highGrossMovies) {
     event.preventDefault();
     getMovies(highGrossUrl);
     moviesTitle.textContent = "High Grossing Movies";
+    window.scroll(0, 0);
   }
 }); ////////////////////////////////////////////////////////
 // Searching Movies
@@ -12525,6 +12684,7 @@ searchForm.addEventListener("submit", function (event) {
     getMovies(searchUrl + searchTerm);
     moviesTitle.textContent = "Search: ".concat(searchTerm);
     searchInput.blur();
+    showSearch();
   } else {
     window.location.reload();
   }
@@ -12533,6 +12693,7 @@ searchForm.addEventListener("submit", function (event) {
 loadMsg();
 window.addEventListener("DOMContentLoaded", function () {
   getMovies(apiUrl);
+  getFavItems();
 });
 },{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","core-js/stable":"node_modules/core-js/stable/index.js"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -12562,7 +12723,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52607" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56041" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

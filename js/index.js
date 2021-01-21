@@ -1,11 +1,11 @@
-import "regenerator-runtime/runtime";
-import "core-js/stable";
-
 //
 // Author: Sergi. J
 //
 
-("use strict");
+"use strict";
+
+import "regenerator-runtime/runtime";
+import "core-js/stable";
 
 ////////////////////////////////////////////////////////
 // API Urls
@@ -33,7 +33,6 @@ const dramaMovies = document.querySelector("#drama-movies");
 const highGrossMovies = document.querySelector("#high-gross-movies");
 
 const moviesContainer = document.querySelector(".movies");
-const mainContainer = document.querySelector("main .container");
 const moviesTitle = document.querySelector(".movies-title");
 
 const search = document.querySelector(".nav__search");
@@ -45,22 +44,32 @@ const hamBtnIcon = document.querySelector(".nav__ham-btn button i");
 const menu = document.querySelector(".nav__menu");
 const menuLinks = document.querySelectorAll(".nav__menu a");
 
+const favContent = document.querySelector(".favorites__content");
+const favItemsContainer = document.querySelector(".favorites__container");
+
+const favBtnContainer = document.querySelector(".favorites__btn");
+
+const favBtn = document.querySelector(".favorites__btn button");
+const favBtnIcon = document.querySelector(".favorites__btn button i");
+
 const footer = document.querySelector(".footer");
+
+let favItems = [];
 
 ////////////////////////////////////////////////////////
 // Navigation & Search Form
 ////////////////////////////////////////////////////////
 
 const showSearch = function () {
-  mainContainer.classList.toggle("container--moved-bottom");
-  footer.classList.toggle("footer--moved-bottom");
   search.classList.toggle("nav__search--show");
   searchBtnIcon.classList.toggle("fa-times");
+  favContent.classList.toggle("favorites--moved-y");
 };
 
 const showNav = function () {
   menu.classList.toggle("nav__menu--show");
   hamBtnIcon.classList.toggle("fa-times");
+  favContent.classList.toggle("favorites--moved-x");
 };
 
 const outSideClick = function (event) {
@@ -77,6 +86,15 @@ const outSideClick = function (event) {
     !event.target.closest(".nav__search")
   ) {
     showSearch();
+  } else if (
+    favItemsContainer.classList.contains("favorites__container--show") &&
+    !favBtn.contains(event.target) &&
+    !event.target.closest(".favorites__container") &&
+    !event.target.classList.contains("movies__item__fav")
+  ) {
+    showFav();
+  } else if (favItemsContainer.classList.contains("fav-show")) {
+    showFav();
   }
 };
 
@@ -84,6 +102,18 @@ searchBtn.addEventListener("click", showSearch);
 hamBtn.addEventListener("click", showNav);
 menuLinks.forEach((link) => link.addEventListener("click", showNav));
 document.addEventListener("click", outSideClick);
+
+////////////////////////////////////////////////////////
+// Fav Items
+////////////////////////////////////////////////////////
+
+const showFav = function () {
+  favItemsContainer.classList.toggle("favorites__container--show");
+  favBtnIcon.classList.toggle("fa-times");
+  favItemsContainer.classList.remove("fav-show");
+};
+
+favBtn.addEventListener("click", showFav);
 
 ////////////////////////////////////////////////////////
 // Getting Movies
@@ -128,10 +158,14 @@ const renderMovies = function (movies) {
         `
         <div class="movies__item" data-id="${id}">
         <h6 class="movies__item__title">${title}</h6>
-        <img class="movies__item__img" src="${imgPath + image}" />
+         <div class="movies__item__img-container">
+         <img class="movies__item__img" src="${imgPath + image}" />
+         <button class="movies__item__fav" data-id="${id}">
+         Add To Favorites
+         </button>
+         </div>
         <div class="movies__item__details">
         <span class="movies__item__date">${date}</span>
-
         <span class="movies__item__vote" style="color:${checkColor(vote)}">
         ${vote}
         </span>
@@ -143,6 +177,7 @@ const renderMovies = function (movies) {
     }
   });
   clickCheck();
+  btnCheck();
 };
 
 ////////////////////////////////////////////////////////
@@ -174,13 +209,34 @@ const clickCheck = function () {
   const moviesItem = document.querySelectorAll(".movies__item");
   moviesItem.forEach((item) =>
     item.addEventListener("click", function (event) {
+      const id = item.dataset.id;
       if (event.target.classList.contains("movies__item__img")) {
-        const id = item.dataset.id;
-        window.scroll(0, 140);
+        window.scroll(0, 0);
         getClickedMovie(id);
       }
     })
   );
+  const btns = document.querySelectorAll(".movies__item__fav");
+  btns.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const id = btn.dataset.id.toString();
+      btn.textContent = "In Favorites";
+      btn.setAttribute("disabled", true);
+
+      if (!favItems.includes(id)) {
+        favItems.push(id);
+        fetchFavItem(id);
+        addToStorage(favItems);
+        favItemsContainer.scroll(0, 0);
+        if (
+          !favItemsContainer.classList.contains("fav-show") &&
+          !favItemsContainer.classList.contains("favorites__container--show")
+        ) {
+          favItemsContainer.classList.toggle("fav-show");
+        }
+      }
+    });
+  });
 };
 
 const getClickedMovie = async function (id) {
@@ -198,6 +254,113 @@ const getClickedMovie = async function (id) {
       `<a class="btn-home" href="./">Main Page</a>`
     );
   }
+};
+
+////////////////////////////////////////////////////////
+// Add to Favorites
+////////////////////////////////////////////////////////
+
+const btnCheck = function () {
+  const btns = document.querySelectorAll(".movies__item__fav");
+  btns.forEach((btn) => {
+    if (favItems.includes(btn.dataset.id)) {
+      btn.textContent = "In Favorites";
+      btn.setAttribute("disabled", true);
+    } else {
+      btn.textContent = "Add to Favorites";
+      btn.removeAttribute("disabled");
+    }
+  });
+};
+
+const addToStorage = function (favItems) {
+  localStorage.setItem("favs", favItems);
+};
+
+const getFavItems = function () {
+  const favItemsLC = localStorage.getItem("favs");
+  if (favItemsLC) {
+    favItems = favItemsLC.split(",");
+    favItems.forEach((item) => {
+      fetchFavItem(item);
+    });
+  }
+};
+
+const fetchFavItem = async function (id) {
+  try {
+    const resp = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=53d1126a0f1a18cf2551da1519c821af`
+    );
+    const data = await resp.json();
+    const movie = data;
+    renderFavItem(movie);
+  } catch (error) {
+    moviesTitle.textContent = error;
+    moviesContainer.insertAdjacentHTML(
+      "beforeend",
+      `<a class="btn-home" href="./">Main Page</a>`
+    );
+  }
+};
+
+const renderFavItem = function (movie) {
+  const image = movie.poster_path;
+  const title = movie.title;
+  const date = movie.release_date;
+  const id = movie.id;
+  favItemsContainer.insertAdjacentHTML(
+    "afterbegin",
+    `
+  <div class="favorites__item" data-id="${id}">
+  <img class="favorites__item__img" src="${imgPath + image}" />
+
+<div class="favorites__item__info">
+<p>
+<span class="favorites__item__title">${title}</span>
+<span>${date}</span>
+<button class="favorites__item__remove-btn" data-id="${id}">Remove</button>
+</div>
+
+  </div>
+  `
+  );
+  favClickCheck();
+};
+
+const favClickCheck = function () {
+  const moviesItem = document.querySelectorAll(".favorites__item");
+  moviesItem.forEach((item) =>
+    item.addEventListener("click", function (event) {
+      let id = item.dataset.id;
+      if (event.target.classList.contains("favorites__item__img")) {
+        getClickedMovie(id);
+        window.scroll(0, 0);
+        favItemsContainer.classList.remove("favorites__container--show");
+        favItemsContainer.classList.remove("fav-show");
+      }
+      if (event.target.classList.contains("favorites__item__remove-btn")) {
+        const btn = event.target;
+        const clickedItem = btn.parentElement.parentElement.parentElement;
+        id = id.toString();
+        favItems = favItems.filter((item) => item !== id);
+        addToStorage(favItems);
+
+        setTimeout(function () {
+          if (clickedItem.parentNode) {
+            favItemsContainer.removeChild(
+              btn.parentElement.parentElement.parentElement
+            );
+            if (!favItemsContainer.firstElementChild) {
+              showFav();
+            }
+          }
+        }, 0);
+
+        btnCheck();
+      }
+    })
+  );
 };
 
 ////////////////////////////////////////////////////////
@@ -255,14 +418,17 @@ nav.addEventListener("click", function (event) {
   if (event.target === popMovies) {
     getMovies(apiUrl);
     moviesTitle.textContent = "Popular Movies";
+    window.scroll(0, 0);
   } else if (event.target === dramaMovies) {
     event.preventDefault();
     getMovies(dramaMoviesUrl);
     moviesTitle.textContent = "Drama Movies";
+    window.scroll(0, 0);
   } else if (event.target === highGrossMovies) {
     event.preventDefault();
     getMovies(highGrossUrl);
     moviesTitle.textContent = "High Grossing Movies";
+    window.scroll(0, 0);
   }
 });
 
@@ -277,6 +443,7 @@ searchForm.addEventListener("submit", (event) => {
     getMovies(searchUrl + searchTerm);
     moviesTitle.textContent = `Search: ${searchTerm}`;
     searchInput.blur();
+    showSearch();
   } else {
     window.location.reload();
   }
@@ -286,4 +453,5 @@ searchForm.addEventListener("submit", (event) => {
 loadMsg();
 window.addEventListener("DOMContentLoaded", () => {
   getMovies(apiUrl);
+  getFavItems();
 });
