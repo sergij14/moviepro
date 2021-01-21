@@ -47,12 +47,8 @@ const menuLinks = document.querySelectorAll(".nav__menu a");
 const favContent = document.querySelector(".favorites__content");
 const favItemsContainer = document.querySelector(".favorites__container");
 
-const favBtnContainer = document.querySelector(".favorites__btn");
-
 const favBtn = document.querySelector(".favorites__btn button");
 const favBtnIcon = document.querySelector(".favorites__btn button i");
-
-const footer = document.querySelector(".footer");
 
 let favItems = [];
 
@@ -63,13 +59,11 @@ let favItems = [];
 const showSearch = function () {
   search.classList.toggle("nav__search--show");
   searchBtnIcon.classList.toggle("fa-times");
-  favContent.classList.toggle("favorites--moved-y");
 };
 
 const showNav = function () {
   menu.classList.toggle("nav__menu--show");
   hamBtnIcon.classList.toggle("fa-times");
-  favContent.classList.toggle("favorites--moved-x");
 };
 
 const outSideClick = function (event) {

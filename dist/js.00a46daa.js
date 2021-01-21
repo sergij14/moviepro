@@ -12293,10 +12293,8 @@ var menu = document.querySelector(".nav__menu");
 var menuLinks = document.querySelectorAll(".nav__menu a");
 var favContent = document.querySelector(".favorites__content");
 var favItemsContainer = document.querySelector(".favorites__container");
-var favBtnContainer = document.querySelector(".favorites__btn");
 var favBtn = document.querySelector(".favorites__btn button");
 var favBtnIcon = document.querySelector(".favorites__btn button i");
-var footer = document.querySelector(".footer");
 var favItems = []; ////////////////////////////////////////////////////////
 // Navigation & Search Form
 ////////////////////////////////////////////////////////
@@ -12304,13 +12302,11 @@ var favItems = []; ////////////////////////////////////////////////////////
 var showSearch = function showSearch() {
   search.classList.toggle("nav__search--show");
   searchBtnIcon.classList.toggle("fa-times");
-  favContent.classList.toggle("favorites--moved-y");
 };
 
 var showNav = function showNav() {
   menu.classList.toggle("nav__menu--show");
   hamBtnIcon.classList.toggle("fa-times");
-  favContent.classList.toggle("favorites--moved-x");
 };
 
 var outSideClick = function outSideClick(event) {
@@ -12723,7 +12719,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56041" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56500" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
