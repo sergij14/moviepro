@@ -233,14 +233,6 @@ Header
   z-index: 777;
 }
 
-.favorites--moved-y {
-  transform: translateY(10rem);
-}
-
-.favorites--moved-x {
-  transform: translateX(-30rem);
-}
-
 .favorites__content {
   position: relative;
   transition: $transition-primary;
@@ -802,32 +794,39 @@ Media Queries
   }
 }
 
+/* Favorites */
+
 @media screen and (max-width: 1320px) {
   .favorites__container {
     width: 35vw;
+    max-height: 70vh;
   }
 }
 
 @media screen and (max-width: 1120px) {
   .favorites__container {
     width: 40vw;
+    max-height: 65vh;
   }
 }
 
 @media screen and (max-width: 920px) {
   .favorites__container {
     width: 55vw;
+    max-height: 55vh;
   }
 }
 
 @media screen and (max-width: 720px) {
   .favorites__container {
     width: 65vw;
+    max-height: 45vh;
   }
 }
 
 @media screen and (max-width: 520px) {
   .favorites__container {
     width: 100%;
+    max-height: 35vh;
   }
 }

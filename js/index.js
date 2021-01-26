@@ -44,7 +44,6 @@ const hamBtnIcon = document.querySelector(".nav__ham-btn button i");
 const menu = document.querySelector(".nav__menu");
 const menuLinks = document.querySelectorAll(".nav__menu a");
 
-const favContent = document.querySelector(".favorites__content");
 const favItemsContainer = document.querySelector(".favorites__container");
 
 const favBtn = document.querySelector(".favorites__btn button");

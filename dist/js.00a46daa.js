@@ -12291,7 +12291,6 @@ var hamBtn = document.querySelector(".nav__ham-btn");
 var hamBtnIcon = document.querySelector(".nav__ham-btn button i");
 var menu = document.querySelector(".nav__menu");
 var menuLinks = document.querySelectorAll(".nav__menu a");
-var favContent = document.querySelector(".favorites__content");
 var favItemsContainer = document.querySelector(".favorites__container");
 var favBtn = document.querySelector(".favorites__btn button");
 var favBtnIcon = document.querySelector(".favorites__btn button i");
@@ -12719,7 +12718,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57031" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57897" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
