@@ -12581,9 +12581,8 @@ var fetchFavItem = /*#__PURE__*/function () {
 var renderFavItem = function renderFavItem(movie) {
   var image = movie.poster_path;
   var title = movie.title;
-  var date = movie.release_date;
   var id = movie.id;
-  favItemsContainer.insertAdjacentHTML("afterbegin", "\n  <div class=\"favorites__item\" data-id=\"".concat(id, "\">\n  <img class=\"favorites__item__img\" src=\"").concat(imgPath + image, "\" />\n\n<div class=\"favorites__item__info\">\n<p>\n<span class=\"favorites__item__title\">").concat(title, "</span>\n<span>").concat(date, "</span>\n<button class=\"favorites__item__remove-btn\" data-id=\"").concat(id, "\">Remove</button>\n</div>\n\n  </div>\n  "));
+  favItemsContainer.insertAdjacentHTML("afterbegin", "\n  <div class=\"favorites__item\" data-id=\"".concat(id, "\">\n  <img class=\"favorites__item__img\" src=\"").concat(imgPath + image, "\" />\n\n<div class=\"favorites__item__info\">\n<p>\n<span class=\"favorites__item__title\">").concat(title, "</span>\n\n<button class=\"favorites__item__remove-btn\" data-id=\"").concat(id, "\">Remove</button>\n</p>\n</div>\n\n  </div>\n  "));
   favClickCheck();
 };
 
@@ -12718,7 +12717,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60239" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60403" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

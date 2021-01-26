@@ -544,6 +544,7 @@ Header
   border: none;
   outline: 0;
   cursor: pointer;
+  font-size: 1.4rem;
 }
 
 .favorites__item__info span {

@@ -300,7 +300,6 @@ const fetchFavItem = async function (id) {
 const renderFavItem = function (movie) {
   const image = movie.poster_path;
   const title = movie.title;
-  const date = movie.release_date;
   const id = movie.id;
   favItemsContainer.insertAdjacentHTML(
     "afterbegin",
@@ -311,8 +310,9 @@ const renderFavItem = function (movie) {
 <div class="favorites__item__info">
 <p>
 <span class="favorites__item__title">${title}</span>
-<span>${date}</span>
+
 <button class="favorites__item__remove-btn" data-id="${id}">Remove</button>
+</p>
 </div>
 
   </div>
