@@ -318,6 +318,11 @@ Header
   z-index: 4000;
 }
 
+.favorites__btn--passive {
+  opacity: 0.2;
+  transition: $transition-primary;
+}
+
 .favorites__btn button {
   font-size: 2.4rem;
   font-weight: 500;

@@ -36,10 +36,10 @@ const moviesContainer = document.querySelector(".movies");
 const moviesTitle = document.querySelector(".movies-title");
 
 const search = document.querySelector(".nav__search");
-const searchBtn = document.querySelector(".nav__search-btn");
+const searchBtn = document.querySelector(".nav__search-btn button");
 const searchBtnIcon = document.querySelector(".nav__search-btn button i");
 
-const hamBtn = document.querySelector(".nav__ham-btn");
+const hamBtn = document.querySelector(".nav__ham-btn button");
 const hamBtnIcon = document.querySelector(".nav__ham-btn button i");
 const menu = document.querySelector(".nav__menu");
 const menuLinks = document.querySelectorAll(".nav__menu a");
@@ -58,11 +58,13 @@ let favItems = [];
 const showSearch = function () {
   search.classList.toggle("nav__search--show");
   searchBtnIcon.classList.toggle("fa-times");
+  favBtn.classList.toggle("favorites__btn--passive");
 };
 
 const showNav = function () {
   menu.classList.toggle("nav__menu--show");
   hamBtnIcon.classList.toggle("fa-times");
+  favBtn.classList.toggle("favorites__btn--passive");
 };
 
 const outSideClick = function (event) {

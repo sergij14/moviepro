@@ -12285,9 +12285,9 @@ var highGrossMovies = document.querySelector("#high-gross-movies");
 var moviesContainer = document.querySelector(".movies");
 var moviesTitle = document.querySelector(".movies-title");
 var search = document.querySelector(".nav__search");
-var searchBtn = document.querySelector(".nav__search-btn");
+var searchBtn = document.querySelector(".nav__search-btn button");
 var searchBtnIcon = document.querySelector(".nav__search-btn button i");
-var hamBtn = document.querySelector(".nav__ham-btn");
+var hamBtn = document.querySelector(".nav__ham-btn button");
 var hamBtnIcon = document.querySelector(".nav__ham-btn button i");
 var menu = document.querySelector(".nav__menu");
 var menuLinks = document.querySelectorAll(".nav__menu a");
@@ -12301,11 +12301,13 @@ var favItems = []; ////////////////////////////////////////////////////////
 var showSearch = function showSearch() {
   search.classList.toggle("nav__search--show");
   searchBtnIcon.classList.toggle("fa-times");
+  favBtn.classList.toggle("favorites__btn--passive");
 };
 
 var showNav = function showNav() {
   menu.classList.toggle("nav__menu--show");
   hamBtnIcon.classList.toggle("fa-times");
+  favBtn.classList.toggle("favorites__btn--passive");
 };
 
 var outSideClick = function outSideClick(event) {
@@ -12717,7 +12719,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60403" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61019" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
