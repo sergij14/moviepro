@@ -95,7 +95,8 @@ const outSideClick = function (event) {
 
 searchBtn.addEventListener("click", showSearch);
 hamBtn.addEventListener("click", showNav);
-menuLinks.forEach((link) => link.addEventListener("click", showNav));
+if (menu.classList.contains(".nav__menu--show"))
+  menuLinks.forEach((link) => link.addEventListener("click", showNav));
 document.addEventListener("click", outSideClick);
 
 ////////////////////////////////////////////////////////
