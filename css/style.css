@@ -686,6 +686,7 @@ Movies
   border: none;
   outline: 0;
   cursor: pointer;
+  font-size: 1.4rem;
 }
 
 .movies__item__fav:focus,
