@@ -4,8 +4,8 @@
 
 "use strict";
 
-import "regenerator-runtime/runtime";
-import "core-js/stable";
+// import "regenerator-runtime/runtime";
+// import "core-js/stable";
 
 ////////////////////////////////////////////////////////
 // API Urls
@@ -45,6 +45,7 @@ const menu = document.querySelector(".nav__menu");
 const menuLinks = document.querySelectorAll(".nav__menu a");
 
 const favItemsContainer = document.querySelector(".favorites__container");
+const favItemsContainerInner = document.querySelector(".favorites__inner");
 
 const favBtn = document.querySelector(".favorites__btn button");
 const favBtnIcon = document.querySelector(".favorites__btn button i");
@@ -304,7 +305,7 @@ const renderFavItem = function (movie) {
   const image = movie.poster_path;
   const title = movie.title;
   const id = movie.id;
-  favItemsContainer.insertAdjacentHTML(
+  favItemsContainerInner.insertAdjacentHTML(
     "afterbegin",
     `
   <div class="favorites__item" data-id="${id}">

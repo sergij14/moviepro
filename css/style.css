@@ -497,6 +497,10 @@ Header
   background: #31315f;
   z-index: 3999;
   width: 30vw;
+  padding-bottom: 1em;
+}
+
+.favorites__inner {
   padding: 1em;
   display: -webkit-box;
   display: -ms-flexbox;

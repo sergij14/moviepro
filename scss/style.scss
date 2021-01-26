@@ -248,6 +248,10 @@ Header
   background: $tertiary-lighter;
   z-index: 3999;
   width: 30vw;
+  padding-bottom: 1em;
+}
+
+.favorites__inner {
   padding: 1em;
   display: flex;
   flex-direction: column;
