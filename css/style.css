@@ -497,7 +497,7 @@ Header
   background: #31315f;
   z-index: 3999;
   width: 30vw;
-  padding: 6rem 1em 1em 1em;
+  padding: 1em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -525,6 +525,10 @@ Header
   margin: 1em 0 0 0;
   color: #16162c;
   padding: 0.5em;
+}
+
+.favorites__item:first-child {
+  margin: 4em 0 0 0;
 }
 
 .favorites__item__info {

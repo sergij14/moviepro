@@ -248,7 +248,7 @@ Header
   background: $tertiary-lighter;
   z-index: 3999;
   width: 30vw;
-  padding: 6rem 1em 1em 1em;
+  padding: 1em;
   display: flex;
   flex-direction: column;
   max-height: 70vh;
@@ -268,6 +268,10 @@ Header
   margin: 1em 0 0 0;
   color: $tertiary-darker;
   padding: 0.5em;
+}
+
+.favorites__item:first-child {
+  margin: 4em 0 0 0;
 }
 
 .favorites__item__info {
