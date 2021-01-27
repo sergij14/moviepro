@@ -497,6 +497,7 @@ Header
   background: #31315f;
   z-index: 3999;
   width: 30vw;
+  max-height: 70vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -504,9 +505,15 @@ Header
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  max-height: 70vh;
   overflow: auto;
-  padding: 1em;
+  padding: 1em 1em 0 1em;
+}
+
+.favorites__container::after {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 1em;
+          flex: 0 0 1em;
+  content: "";
 }
 
 .favorites__container--show,
