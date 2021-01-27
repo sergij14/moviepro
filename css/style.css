@@ -557,6 +557,10 @@ Header
   color: #ff6363;
 }
 
+.favorites__item__date {
+  font-size: 1.4rem;
+}
+
 .favorites__item__remove-btn {
   font-weight: 500;
   padding: 0.5em 0.8em;
