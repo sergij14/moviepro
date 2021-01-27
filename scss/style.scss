@@ -252,6 +252,8 @@ Header
   display: flex;
   flex-direction: column;
   overflow: auto;
+  -webkit-overflow: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 1em 1em 0 1em;
 }
 
