@@ -271,6 +271,7 @@ Header
 
 .favorites__item {
   display: flex;
+  align-items: center;
   background: $gradient-white;
   margin: 1em 0 0 0;
   color: $tertiary-darker;
@@ -306,11 +307,7 @@ Header
 }
 
 .favorites__item img {
-  height: 100vh;
-  width: 100vh;
-  object-fit: cover;
-  object-position: 50% 0%;
-  max-height: 12rem;
+  max-height: 14rem;
   flex: 0 0 20%;
   max-width: 20%;
   cursor: pointer;
