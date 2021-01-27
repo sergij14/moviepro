@@ -12292,7 +12292,6 @@ var hamBtnIcon = document.querySelector(".nav__ham-btn button i");
 var menu = document.querySelector(".nav__menu");
 var menuLinks = document.querySelectorAll(".nav__menu a");
 var favItemsContainer = document.querySelector(".favorites__container");
-var favItemsContainerInner = document.querySelector(".favorites__inner");
 var favBtn = document.querySelector(".favorites__btn button");
 var favBtnIcon = document.querySelector(".favorites__btn button i");
 var favItems = []; ////////////////////////////////////////////////////////
@@ -12585,7 +12584,7 @@ var renderFavItem = function renderFavItem(movie) {
   var image = movie.poster_path;
   var title = movie.title;
   var id = movie.id;
-  favItemsContainerInner.insertAdjacentHTML("afterbegin", "\n  <div class=\"favorites__item\" data-id=\"".concat(id, "\">\n  <img class=\"favorites__item__img\" src=\"").concat(imgPath + image, "\" />\n\n<div class=\"favorites__item__info\">\n<p>\n<span class=\"favorites__item__title\">").concat(title, "</span>\n\n<button class=\"favorites__item__remove-btn\" data-id=\"").concat(id, "\">Remove</button>\n</p>\n</div>\n\n  </div>\n  "));
+  favItemsContainer.insertAdjacentHTML("afterbegin", "\n  <div class=\"favorites__item\" data-id=\"".concat(id, "\">\n  <img class=\"favorites__item__img\" src=\"").concat(imgPath + image, "\" />\n\n<div class=\"favorites__item__info\">\n<p>\n<span class=\"favorites__item__title\">").concat(title, "</span>\n\n<button class=\"favorites__item__remove-btn\" data-id=\"").concat(id, "\">Remove</button>\n</p>\n</div>\n\n  </div>\n  "));
   favClickCheck();
 };
 
@@ -12720,7 +12719,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54710" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55424" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
