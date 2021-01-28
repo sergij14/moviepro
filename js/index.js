@@ -97,8 +97,15 @@ const outSideClick = function (event) {
 
 searchBtn.addEventListener("click", showSearch);
 hamBtn.addEventListener("click", showNav);
-if (menu.classList.contains(".nav__menu--show"))
-  menuLinks.forEach((link) => link.addEventListener("click", showNav));
+
+menuLinks.forEach((link) =>
+  link.addEventListener("click", function (event) {
+    menu.classList.toggle("nav__menu--show");
+    hamBtnIcon.classList.toggle("fa-times");
+    favBtn.classList.remove("favorites__btn--passive");
+  })
+);
+
 document.addEventListener("click", outSideClick);
 
 ////////////////////////////////////////////////////////
