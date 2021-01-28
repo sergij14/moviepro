@@ -12283,6 +12283,7 @@ var popMovies = document.querySelector("#pop-movies");
 var dramaMovies = document.querySelector("#drama-movies");
 var highGrossMovies = document.querySelector("#high-gross-movies");
 var logoLink = document.querySelector("#logo-link");
+var favCount = document.querySelector(".favorites__count");
 var moviesContainer = document.querySelector(".movies");
 var moviesTitle = document.querySelector(".movies-title");
 var search = document.querySelector(".nav__search");
@@ -12318,8 +12319,6 @@ var outSideClick = function outSideClick(event) {
     showSearch();
   } else if (favItemsContainer.classList.contains("favorites__container--show") && !favBtn.contains(event.target) && !event.target.closest(".favorites__container") && !event.target.classList.contains("movies__item__fav")) {
     showFav();
-  } else if (favItemsContainer.classList.contains("fav-show")) {
-    showFav();
   }
 };
 
@@ -12335,7 +12334,6 @@ document.addEventListener("click", outSideClick); //////////////////////////////
 var showFav = function showFav() {
   favItemsContainer.classList.toggle("favorites__container--show");
   favBtnIcon.classList.toggle("fa-times");
-  favItemsContainer.classList.remove("fav-show");
 };
 
 favBtn.addEventListener("click", showFav); ////////////////////////////////////////////////////////
@@ -12462,11 +12460,8 @@ var clickCheck = function clickCheck() {
         favItems.push(id);
         fetchFavItem(id);
         addToStorage(favItems);
+        favCount.textContent = favItems.length;
         favItemsContainer.scroll(0, 0);
-
-        if (!favItemsContainer.classList.contains("fav-show") && !favItemsContainer.classList.contains("favorites__container--show")) {
-          favItemsContainer.classList.toggle("fav-show");
-        }
 
         if (document.getElementById("no-fav-msg")) {
           favItemsContainer.removeChild(document.getElementById("no-fav-msg"));
@@ -12552,8 +12547,10 @@ var getFavItems = function getFavItems() {
     favItems.forEach(function (item) {
       fetchFavItem(item);
     });
+    favCount.textContent = favItems.length;
   } else {
     favItemsContainer.insertAdjacentHTML("afterbegin", "<h6 id=\"no-fav-msg\" class=\"txt-center pad-tb-1\">No Favorites</h6>");
+    favCount.textContent = "0";
   }
 };
 
@@ -12624,7 +12621,6 @@ var favClickCheck = function favClickCheck() {
         getClickedMovie(id);
         window.scroll(0, 0);
         favItemsContainer.classList.remove("favorites__container--show");
-        favItemsContainer.classList.remove("fav-show");
       }
 
       if (event.target.classList.contains("favorites__item__remove-btn")) {
@@ -12635,6 +12631,7 @@ var favClickCheck = function favClickCheck() {
           return item !== id;
         });
         addToStorage(favItems);
+        favCount.textContent = favItems.length;
         setTimeout(function () {
           if (clickedItem.parentNode) {
             favItemsContainer.removeChild(btn.parentElement.parentElement.parentElement);
@@ -12760,7 +12757,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62274" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62430" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

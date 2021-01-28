@@ -34,6 +34,8 @@ const highGrossMovies = document.querySelector("#high-gross-movies");
 
 const logoLink = document.querySelector("#logo-link");
 
+const favCount = document.querySelector(".favorites__count");
+
 const moviesContainer = document.querySelector(".movies");
 const moviesTitle = document.querySelector(".movies-title");
 
@@ -90,8 +92,6 @@ const outSideClick = function (event) {
     !event.target.classList.contains("movies__item__fav")
   ) {
     showFav();
-  } else if (favItemsContainer.classList.contains("fav-show")) {
-    showFav();
   }
 };
 
@@ -108,7 +108,6 @@ document.addEventListener("click", outSideClick);
 const showFav = function () {
   favItemsContainer.classList.toggle("favorites__container--show");
   favBtnIcon.classList.toggle("fa-times");
-  favItemsContainer.classList.remove("fav-show");
 };
 
 favBtn.addEventListener("click", showFav);
@@ -231,13 +230,9 @@ const clickCheck = function () {
         favItems.push(id);
         fetchFavItem(id);
         addToStorage(favItems);
+        favCount.textContent = favItems.length;
         favItemsContainer.scroll(0, 0);
-        if (
-          !favItemsContainer.classList.contains("fav-show") &&
-          !favItemsContainer.classList.contains("favorites__container--show")
-        ) {
-          favItemsContainer.classList.toggle("fav-show");
-        }
+
         if (document.getElementById("no-fav-msg")) {
           favItemsContainer.removeChild(document.getElementById("no-fav-msg"));
         }
@@ -297,11 +292,13 @@ const getFavItems = function () {
     favItems.forEach((item) => {
       fetchFavItem(item);
     });
+    favCount.textContent = favItems.length;
   } else {
     favItemsContainer.insertAdjacentHTML(
       "afterbegin",
       `<h6 id="no-fav-msg" class="txt-center pad-tb-1">No Favorites</h6>`
     );
+    favCount.textContent = "0";
   }
 };
 
@@ -362,7 +359,6 @@ const favClickCheck = function () {
         getClickedMovie(id);
         window.scroll(0, 0);
         favItemsContainer.classList.remove("favorites__container--show");
-        favItemsContainer.classList.remove("fav-show");
       }
       if (event.target.classList.contains("favorites__item__remove-btn")) {
         const btn = event.target;
@@ -370,7 +366,7 @@ const favClickCheck = function () {
         id = id.toString();
         favItems = favItems.filter((item) => item !== id);
         addToStorage(favItems);
-
+        favCount.textContent = favItems.length;
         setTimeout(function () {
           if (clickedItem.parentNode) {
             favItemsContainer.removeChild(

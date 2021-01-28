@@ -262,8 +262,7 @@ Header
   content: "";
 }
 
-.favorites__container--show,
-.fav-show {
+.favorites__container--show {
   transform: translateY(0%);
   visibility: visible;
   opacity: 1;
@@ -309,6 +308,12 @@ Header
   font-size: 1.4rem;
 }
 
+.favorites__item__remove-btn:hover,
+.favorites__item__remove-btn:focus {
+  background: $gradient-secondary;
+  color: $white;
+}
+
 .favorites__item__info span {
   display: block;
 }
@@ -340,6 +345,19 @@ Header
 .favorites__btn--passive {
   opacity: 0.2;
   transition: $transition-primary;
+}
+
+.favorites__count {
+  position: absolute;
+  display: inline-block;
+  background: $primary;
+  padding: 0 0.6em;
+  color: $white;
+  right: 5rem;
+  top: 1.75rem;
+  height: 2.5rem;
+  font-size: 1.4rem;
+  line-height: 2.5rem;
 }
 
 .favorites__btn button {
@@ -830,27 +848,27 @@ Media Queries
 @media screen and (max-width: 1120px) {
   .favorites__container {
     width: 40vw;
-    max-height: 65vh;
+    max-height: 66vh;
   }
 }
 
 @media screen and (max-width: 920px) {
   .favorites__container {
     width: 55vw;
-    max-height: 55vh;
+    max-height: 62vh;
   }
 }
 
 @media screen and (max-width: 720px) {
   .favorites__container {
     width: 65vw;
-    max-height: 45vh;
+    max-height: 55vh;
   }
 }
 
 @media screen and (max-width: 520px) {
   .favorites__container {
     width: 100%;
-    max-height: 35vh;
+    max-height: 45vh;
   }
 }
