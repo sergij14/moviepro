@@ -32,6 +32,8 @@ const popMovies = document.querySelector("#pop-movies");
 const dramaMovies = document.querySelector("#drama-movies");
 const highGrossMovies = document.querySelector("#high-gross-movies");
 
+const homeLinks = document.querySelectorAll("#home");
+
 const moviesContainer = document.querySelector(".movies");
 const moviesTitle = document.querySelector(".movies-title");
 
@@ -247,7 +249,7 @@ const getClickedMovie = async function (id) {
     moviesTitle.textContent = error;
     moviesContainer.insertAdjacentHTML(
       "beforeend",
-      `<a class="btn-home" href="./">Main Page</a>`
+      `<a class="btn-home" id="home" href="./">Main Page</a>`
     );
   }
 };
@@ -399,7 +401,7 @@ const renderClickedMovie = function (movie) {
 
     <a class="movies__detail__imdb-btn mar-tb-05" target="_blank" href="https://www.imdb.com/title/${imdbID}/">View On IMDB</a>
     
-    <p class="home-link mar-t-1">or <a href="./"><b>Return Home</b></a></p>
+    <p class="home-link mar-t-1">or <a id="home" href="./"><b>Return Home</b></a></p>
 
     </div>
     </div>
@@ -413,6 +415,7 @@ const renderClickedMovie = function (movie) {
 
 nav.addEventListener("click", function (event) {
   if (event.target === popMovies) {
+    event.preventDefault();
     getMovies(apiUrl);
     moviesTitle.textContent = "Popular Movies";
     window.scroll(0, 0);
@@ -451,4 +454,11 @@ loadMsg();
 window.addEventListener("DOMContentLoaded", () => {
   getMovies(apiUrl);
   getFavItems();
+  homeLinks.forEach((lnk) =>
+    lnk.addEventListener("click", function (event) {
+      event.preventDefault();
+      getMovies(apiUrl);
+      moviesTitle.textContent = "Popular Movies";
+    })
+  );
 });

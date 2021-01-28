@@ -12282,6 +12282,7 @@ var searchInput = document.querySelector(".nav__search__input");
 var popMovies = document.querySelector("#pop-movies");
 var dramaMovies = document.querySelector("#drama-movies");
 var highGrossMovies = document.querySelector("#high-gross-movies");
+var homeLinks = document.querySelectorAll("#home");
 var moviesContainer = document.querySelector(".movies");
 var moviesTitle = document.querySelector(".movies-title");
 var search = document.querySelector(".nav__search");
@@ -12492,7 +12493,7 @@ var getClickedMovie = /*#__PURE__*/function () {
             _context2.prev = 11;
             _context2.t0 = _context2["catch"](0);
             moviesTitle.textContent = _context2.t0;
-            moviesContainer.insertAdjacentHTML("beforeend", "<a class=\"btn-home\" href=\"./\">Main Page</a>");
+            moviesContainer.insertAdjacentHTML("beforeend", "<a class=\"btn-home\" id=\"home\" href=\"./\">Main Page</a>");
 
           case 15:
           case "end":
@@ -12647,7 +12648,7 @@ var renderClickedMovie = function renderClickedMovie(movie) {
 
   moviesContainer.innerHTML = "";
   moviesTitle.textContent = "Movie Details: " + title;
-  moviesContainer.insertAdjacentHTML("beforeend", "\n    <div class=\"movies__detail\">\n    <div class=\"movies__detail__img\">\n    <img src=\"".concat(imgPath + image, "\" />\n    </div>\n    <div class=\"movies__detail__info\">\n    <span class=\"movies__detail__genres mar-tb-05\">").concat(getGenres(genres), "</span>\n    <span class=\"movies__detail__date\">Release Date: <b>").concat(date, "</b></span>\n    <span class=\"movies__detail__vote mar-tb-05\">Votes: <b><font style=\"color:").concat(checkColor(vote), "\">").concat(vote, "</font></b></span>\n    <span class=\"movies__detail__runtime\">Rruntime: <b>").concat(runtime, "</b> Min</span>\n    <p class=\"movies__detail__plot mar-tb-1\"><b>Overview:</b></b><br>").concat(plot, "</p>\n\n    <a class=\"movies__detail__imdb-btn mar-tb-05\" target=\"_blank\" href=\"https://www.imdb.com/title/").concat(imdbID, "/\">View On IMDB</a>\n    \n    <p class=\"home-link mar-t-1\">or <a href=\"./\"><b>Return Home</b></a></p>\n\n    </div>\n    </div>\n          "));
+  moviesContainer.insertAdjacentHTML("beforeend", "\n    <div class=\"movies__detail\">\n    <div class=\"movies__detail__img\">\n    <img src=\"".concat(imgPath + image, "\" />\n    </div>\n    <div class=\"movies__detail__info\">\n    <span class=\"movies__detail__genres mar-tb-05\">").concat(getGenres(genres), "</span>\n    <span class=\"movies__detail__date\">Release Date: <b>").concat(date, "</b></span>\n    <span class=\"movies__detail__vote mar-tb-05\">Votes: <b><font style=\"color:").concat(checkColor(vote), "\">").concat(vote, "</font></b></span>\n    <span class=\"movies__detail__runtime\">Rruntime: <b>").concat(runtime, "</b> Min</span>\n    <p class=\"movies__detail__plot mar-tb-1\"><b>Overview:</b></b><br>").concat(plot, "</p>\n\n    <a class=\"movies__detail__imdb-btn mar-tb-05\" target=\"_blank\" href=\"https://www.imdb.com/title/").concat(imdbID, "/\">View On IMDB</a>\n    \n    <p class=\"home-link mar-t-1\">or <a id=\"home\" href=\"./\"><b>Return Home</b></a></p>\n\n    </div>\n    </div>\n          "));
 }; ////////////////////////////////////////////////////////
 // Movie Categories
 ////////////////////////////////////////////////////////
@@ -12655,6 +12656,7 @@ var renderClickedMovie = function renderClickedMovie(movie) {
 
 nav.addEventListener("click", function (event) {
   if (event.target === popMovies) {
+    event.preventDefault();
     getMovies(apiUrl);
     moviesTitle.textContent = "Popular Movies";
     window.scroll(0, 0);
@@ -12691,6 +12693,13 @@ loadMsg();
 window.addEventListener("DOMContentLoaded", function () {
   getMovies(apiUrl);
   getFavItems();
+  homeLinks.forEach(function (lnk) {
+    return lnk.addEventListener("click", function (event) {
+      event.preventDefault();
+      getMovies(apiUrl);
+      moviesTitle.textContent = "Popular Movies";
+    });
+  });
 });
 },{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","core-js/stable":"node_modules/core-js/stable/index.js"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -12720,7 +12729,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60233" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61117" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
