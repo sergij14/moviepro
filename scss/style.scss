@@ -342,11 +342,6 @@ Header
   z-index: 4000;
 }
 
-.favorites__btn--passive {
-  opacity: 0.2;
-  transition: $transition-primary;
-}
-
 .favorites__count {
   position: absolute;
   display: inline-block;

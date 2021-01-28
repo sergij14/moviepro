@@ -62,13 +62,11 @@ let favItems = [];
 const showSearch = function () {
   search.classList.toggle("nav__search--show");
   searchBtnIcon.classList.toggle("fa-times");
-  favBtn.classList.toggle("favorites__btn--passive");
 };
 
 const showNav = function () {
   menu.classList.toggle("nav__menu--show");
   hamBtnIcon.classList.toggle("fa-times");
-  favBtn.classList.toggle("favorites__btn--passive");
 };
 
 const outSideClick = function (event) {
@@ -98,13 +96,7 @@ const outSideClick = function (event) {
 searchBtn.addEventListener("click", showSearch);
 hamBtn.addEventListener("click", showNav);
 
-menuLinks.forEach((link) =>
-  link.addEventListener("click", function () {
-    menu.classList.toggle("nav__menu--show");
-    hamBtnIcon.classList.toggle("fa-times");
-    favBtn.classList.remove("favorites__btn--passive");
-  })
-);
+menuLinks.forEach((link) => link.addEventListener("click", showNav));
 
 document.addEventListener("click", outSideClick);
 
@@ -491,7 +483,6 @@ searchForm.addEventListener("submit", (event) => {
     searchInput.blur();
     search.classList.remove("nav__search--show");
     searchBtnIcon.classList.remove("fa-times");
-    favBtn.classList.remove("favorites__btn--passive");
   } else {
     window.location.reload();
   }

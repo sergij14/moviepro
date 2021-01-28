@@ -12303,13 +12303,11 @@ var favItems = []; ////////////////////////////////////////////////////////
 var showSearch = function showSearch() {
   search.classList.toggle("nav__search--show");
   searchBtnIcon.classList.toggle("fa-times");
-  favBtn.classList.toggle("favorites__btn--passive");
 };
 
 var showNav = function showNav() {
   menu.classList.toggle("nav__menu--show");
   hamBtnIcon.classList.toggle("fa-times");
-  favBtn.classList.toggle("favorites__btn--passive");
 };
 
 var outSideClick = function outSideClick(event) {
@@ -12325,11 +12323,7 @@ var outSideClick = function outSideClick(event) {
 searchBtn.addEventListener("click", showSearch);
 hamBtn.addEventListener("click", showNav);
 menuLinks.forEach(function (link) {
-  return link.addEventListener("click", function () {
-    menu.classList.toggle("nav__menu--show");
-    hamBtnIcon.classList.toggle("fa-times");
-    favBtn.classList.remove("favorites__btn--passive");
-  });
+  return link.addEventListener("click", showNav);
 });
 document.addEventListener("click", outSideClick); ////////////////////////////////////////////////////////
 // Fav Items
@@ -12722,7 +12716,6 @@ searchForm.addEventListener("submit", function (event) {
     searchInput.blur();
     search.classList.remove("nav__search--show");
     searchBtnIcon.classList.remove("fa-times");
-    favBtn.classList.remove("favorites__btn--passive");
   } else {
     window.location.reload();
   }
@@ -12761,7 +12754,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63054" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51644" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
