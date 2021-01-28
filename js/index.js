@@ -486,7 +486,9 @@ searchForm.addEventListener("submit", (event) => {
     getMovies(searchUrl + searchTerm);
     moviesTitle.textContent = `Search: ${searchTerm}`;
     searchInput.blur();
-    showSearch();
+    search.classList.remove("nav__search--show");
+    searchBtnIcon.classList.remove("fa-times");
+    favBtn.classList.remove("favorites__btn--passive");
   } else {
     window.location.reload();
   }
