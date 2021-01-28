@@ -32,7 +32,7 @@ const popMovies = document.querySelector("#pop-movies");
 const dramaMovies = document.querySelector("#drama-movies");
 const highGrossMovies = document.querySelector("#high-gross-movies");
 
-const homeLinks = document.querySelectorAll("#home");
+const logoLink = document.querySelector("#logo-link");
 
 const moviesContainer = document.querySelector(".movies");
 const moviesTitle = document.querySelector(".movies-title");
@@ -128,8 +128,14 @@ const getMovies = async function (url) {
     moviesTitle.textContent = error;
     moviesContainer.insertAdjacentHTML(
       "beforeend",
-      `<a class="btn-home" href="./">Main Page</a>`
+      `<a id="home" class="btn-home" href="#">Main Page</a>`
     );
+    document.getElementById("home").addEventListener("click", function (event) {
+      event.preventDefault();
+      getMovies(highGrossUrl);
+      moviesTitle.textContent = "Popular Movies";
+      window.scroll(0, 0);
+    });
   }
 };
 
@@ -232,6 +238,9 @@ const clickCheck = function () {
         ) {
           favItemsContainer.classList.toggle("fav-show");
         }
+        if (document.getElementById("no-fav-msg")) {
+          favItemsContainer.removeChild(document.getElementById("no-fav-msg"));
+        }
       }
     });
   });
@@ -249,8 +258,14 @@ const getClickedMovie = async function (id) {
     moviesTitle.textContent = error;
     moviesContainer.insertAdjacentHTML(
       "beforeend",
-      `<a class="btn-home" id="home" href="./">Main Page</a>`
+      `<a class="btn-home" id="home" href="#">Main Page</a>`
     );
+    document.getElementById("home").addEventListener("click", function (event) {
+      event.preventDefault();
+      getMovies(highGrossUrl);
+      moviesTitle.textContent = "Popular Movies";
+      window.scroll(0, 0);
+    });
   }
 };
 
@@ -282,6 +297,11 @@ const getFavItems = function () {
     favItems.forEach((item) => {
       fetchFavItem(item);
     });
+  } else {
+    favItemsContainer.insertAdjacentHTML(
+      "afterbegin",
+      `<h6 id="no-fav-msg" class="txt-center pad-tb-1">No Favorites</h6>`
+    );
   }
 };
 
@@ -297,8 +317,14 @@ const fetchFavItem = async function (id) {
     moviesTitle.textContent = error;
     moviesContainer.insertAdjacentHTML(
       "beforeend",
-      `<a class="btn-home" href="./">Main Page</a>`
+      `<a id="home" class="btn-home" href="#">Main Page</a>`
     );
+    document.getElementById("home").addEventListener("click", function (event) {
+      event.preventDefault();
+      getMovies(highGrossUrl);
+      moviesTitle.textContent = "Popular Movies";
+      window.scroll(0, 0);
+    });
   }
 };
 
@@ -352,6 +378,10 @@ const favClickCheck = function () {
             );
             if (!favItemsContainer.firstElementChild) {
               showFav();
+              favItemsContainer.insertAdjacentHTML(
+                "afterbegin",
+                `<h6 id="no-fav-msg" class="txt-center pad-tb-1">No Favorites</h6>`
+              );
             }
           }
         }, 0);
@@ -401,12 +431,20 @@ const renderClickedMovie = function (movie) {
 
     <a class="movies__detail__imdb-btn mar-tb-05" target="_blank" href="https://www.imdb.com/title/${imdbID}/">View On IMDB</a>
     
-    <p class="home-link mar-t-1">or <a id="home" href="./"><b>Return Home</b></a></p>
+    <p class="home-link mar-t-1">or <a id="return-home" href="#"><b>Return Home</b></a></p>
 
     </div>
     </div>
           `
   );
+  document
+    .getElementById("return-home")
+    .addEventListener("click", function (event) {
+      event.preventDefault();
+      getMovies(highGrossUrl);
+      moviesTitle.textContent = "Popular Movies";
+      window.scroll(0, 0);
+    });
 };
 
 ////////////////////////////////////////////////////////
@@ -428,6 +466,11 @@ nav.addEventListener("click", function (event) {
     event.preventDefault();
     getMovies(highGrossUrl);
     moviesTitle.textContent = "High Grossing Movies";
+    window.scroll(0, 0);
+  } else if (event.target === logoLink) {
+    event.preventDefault();
+    getMovies(apiUrl);
+    moviesTitle.textContent = "Popular Movies";
     window.scroll(0, 0);
   }
 });
@@ -454,11 +497,4 @@ loadMsg();
 window.addEventListener("DOMContentLoaded", () => {
   getMovies(apiUrl);
   getFavItems();
-  homeLinks.forEach((lnk) =>
-    lnk.addEventListener("click", function (event) {
-      event.preventDefault();
-      getMovies(apiUrl);
-      moviesTitle.textContent = "Popular Movies";
-    })
-  );
 });
