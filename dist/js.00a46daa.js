@@ -12325,7 +12325,7 @@ var outSideClick = function outSideClick(event) {
 searchBtn.addEventListener("click", showSearch);
 hamBtn.addEventListener("click", showNav);
 menuLinks.forEach(function (link) {
-  return link.addEventListener("click", function (event) {
+  return link.addEventListener("click", function () {
     menu.classList.toggle("nav__menu--show");
     hamBtnIcon.classList.toggle("fa-times");
     favBtn.classList.remove("favorites__btn--passive");
@@ -12761,7 +12761,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62813" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63054" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

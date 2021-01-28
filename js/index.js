@@ -99,7 +99,7 @@ searchBtn.addEventListener("click", showSearch);
 hamBtn.addEventListener("click", showNav);
 
 menuLinks.forEach((link) =>
-  link.addEventListener("click", function (event) {
+  link.addEventListener("click", function () {
     menu.classList.toggle("nav__menu--show");
     hamBtnIcon.classList.toggle("fa-times");
     favBtn.classList.remove("favorites__btn--passive");
