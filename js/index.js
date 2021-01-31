@@ -478,6 +478,7 @@ searchForm.addEventListener("submit", (event) => {
   const searchTerm = searchInput.value;
   event.preventDefault();
   if (searchTerm !== "") {
+    window.scroll(0, 0);
     getMovies(searchUrl + searchTerm);
     moviesTitle.textContent = `Search: ${searchTerm}`;
     searchInput.blur();
