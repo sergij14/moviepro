@@ -129,10 +129,7 @@ const getMovies = async function (url) {
       `<a id="home" class="btn-home" href="#">Main Page</a>`
     );
     document.getElementById("home").addEventListener("click", function (event) {
-      event.preventDefault();
-      getMovies(highGrossUrl);
-      moviesTitle.textContent = "Popular Movies";
-      window.scroll(0, 0);
+      goHome();
     });
   }
 };
@@ -203,6 +200,13 @@ const loadMsg = () => {
   );
 };
 
+const goHome = () => {
+  event.preventDefault();
+  getMovies(apiUrl);
+  moviesTitle.textContent = "Popular Movies";
+  window.scroll(0, 0);
+};
+
 ////////////////////////////////////////////////////////
 // Get Clicked Movie
 ////////////////////////////////////////////////////////
@@ -255,10 +259,7 @@ const getClickedMovie = async function (id) {
       `<a class="btn-home" id="home" href="#">Main Page</a>`
     );
     document.getElementById("home").addEventListener("click", function (event) {
-      event.preventDefault();
-      getMovies(highGrossUrl);
-      moviesTitle.textContent = "Popular Movies";
-      window.scroll(0, 0);
+      goHome();
     });
   }
 };
@@ -316,10 +317,7 @@ const fetchFavItem = async function (id) {
       `<a id="home" class="btn-home" href="#">Main Page</a>`
     );
     document.getElementById("home").addEventListener("click", function (event) {
-      event.preventDefault();
-      getMovies(highGrossUrl);
-      moviesTitle.textContent = "Popular Movies";
-      window.scroll(0, 0);
+      goHome();
     });
   }
 };
@@ -435,10 +433,7 @@ const renderClickedMovie = function (movie) {
   document
     .getElementById("return-home")
     .addEventListener("click", function (event) {
-      event.preventDefault();
-      getMovies(highGrossUrl);
-      moviesTitle.textContent = "Popular Movies";
-      window.scroll(0, 0);
+      goHome();
     });
 };
 
@@ -448,10 +443,7 @@ const renderClickedMovie = function (movie) {
 
 nav.addEventListener("click", function (event) {
   if (event.target === popMovies) {
-    event.preventDefault();
-    getMovies(apiUrl);
-    moviesTitle.textContent = "Popular Movies";
-    window.scroll(0, 0);
+    goHome();
   } else if (event.target === dramaMovies) {
     event.preventDefault();
     getMovies(dramaMoviesUrl);
@@ -463,10 +455,7 @@ nav.addEventListener("click", function (event) {
     moviesTitle.textContent = "High Grossing Movies";
     window.scroll(0, 0);
   } else if (event.target === logoLink) {
-    event.preventDefault();
-    getMovies(apiUrl);
-    moviesTitle.textContent = "Popular Movies";
-    window.scroll(0, 0);
+    goHome();
   }
 });
 

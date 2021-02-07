@@ -12376,10 +12376,7 @@ var getMovies = /*#__PURE__*/function () {
             moviesTitle.textContent = _context.t0;
             moviesContainer.insertAdjacentHTML("beforeend", "<a id=\"home\" class=\"btn-home\" href=\"#\">Main Page</a>");
             document.getElementById("home").addEventListener("click", function (event) {
-              event.preventDefault();
-              getMovies(highGrossUrl);
-              moviesTitle.textContent = "Popular Movies";
-              window.scroll(0, 0);
+              goHome();
             });
 
           case 18:
@@ -12430,6 +12427,13 @@ var checkColor = function checkColor(vote) {
 
 var loadMsg = function loadMsg() {
   moviesContainer.insertAdjacentHTML("beforeend", "<h6><i class=\"fas fa-spinner\"></i></h6>");
+};
+
+var goHome = function goHome() {
+  event.preventDefault();
+  getMovies(apiUrl);
+  moviesTitle.textContent = "Popular Movies";
+  window.scroll(0, 0);
 }; ////////////////////////////////////////////////////////
 // Get Clicked Movie
 ////////////////////////////////////////////////////////
@@ -12498,10 +12502,7 @@ var getClickedMovie = /*#__PURE__*/function () {
             moviesTitle.textContent = _context2.t0;
             moviesContainer.insertAdjacentHTML("beforeend", "<a class=\"btn-home\" id=\"home\" href=\"#\">Main Page</a>");
             document.getElementById("home").addEventListener("click", function (event) {
-              event.preventDefault();
-              getMovies(highGrossUrl);
-              moviesTitle.textContent = "Popular Movies";
-              window.scroll(0, 0);
+              goHome();
             });
 
           case 16:
@@ -12581,10 +12582,7 @@ var fetchFavItem = /*#__PURE__*/function () {
             moviesTitle.textContent = _context3.t0;
             moviesContainer.insertAdjacentHTML("beforeend", "<a id=\"home\" class=\"btn-home\" href=\"#\">Main Page</a>");
             document.getElementById("home").addEventListener("click", function (event) {
-              event.preventDefault();
-              getMovies(highGrossUrl);
-              moviesTitle.textContent = "Popular Movies";
-              window.scroll(0, 0);
+              goHome();
             });
 
           case 16:
@@ -12670,10 +12668,7 @@ var renderClickedMovie = function renderClickedMovie(movie) {
   moviesTitle.textContent = "Movie Details: " + title;
   moviesContainer.insertAdjacentHTML("beforeend", "\n    <div class=\"movies__detail\">\n    <div class=\"movies__detail__img\">\n    <img src=\"".concat(imgPath + image, "\" />\n    </div>\n    <div class=\"movies__detail__info\">\n    <span class=\"movies__detail__genres mar-tb-05\">").concat(getGenres(genres), "</span>\n    <span class=\"movies__detail__date\">Release Date: <b>").concat(date, "</b></span>\n    <span class=\"movies__detail__vote mar-tb-05\">Votes: <b><font style=\"color:").concat(checkColor(vote), "\">").concat(vote, "</font></b></span>\n    <span class=\"movies__detail__runtime\">Rruntime: <b>").concat(runtime, "</b> Min</span>\n    <p class=\"movies__detail__plot mar-tb-1\"><b>Overview:</b></b><br>").concat(plot, "</p>\n\n    <a class=\"movies__detail__imdb-btn mar-tb-05\" target=\"_blank\" href=\"https://www.imdb.com/title/").concat(imdbID, "/\">View On IMDB</a>\n    \n    <p class=\"home-link mar-t-1\">or <a id=\"return-home\" href=\"#\"><b>Return Home</b></a></p>\n\n    </div>\n    </div>\n          "));
   document.getElementById("return-home").addEventListener("click", function (event) {
-    event.preventDefault();
-    getMovies(highGrossUrl);
-    moviesTitle.textContent = "Popular Movies";
-    window.scroll(0, 0);
+    goHome();
   });
 }; ////////////////////////////////////////////////////////
 // Movie Categories
@@ -12682,10 +12677,7 @@ var renderClickedMovie = function renderClickedMovie(movie) {
 
 nav.addEventListener("click", function (event) {
   if (event.target === popMovies) {
-    event.preventDefault();
-    getMovies(apiUrl);
-    moviesTitle.textContent = "Popular Movies";
-    window.scroll(0, 0);
+    goHome();
   } else if (event.target === dramaMovies) {
     event.preventDefault();
     getMovies(dramaMoviesUrl);
@@ -12697,10 +12689,7 @@ nav.addEventListener("click", function (event) {
     moviesTitle.textContent = "High Grossing Movies";
     window.scroll(0, 0);
   } else if (event.target === logoLink) {
-    event.preventDefault();
-    getMovies(apiUrl);
-    moviesTitle.textContent = "Popular Movies";
-    window.scroll(0, 0);
+    goHome();
   }
 }); ////////////////////////////////////////////////////////
 // Searching Movies
@@ -12755,7 +12744,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51813" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55995" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
