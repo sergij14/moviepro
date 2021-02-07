@@ -128,7 +128,7 @@ const getMovies = async function (url) {
       "beforeend",
       `<a id="home" class="btn-home" href="#">Main Page</a>`
     );
-    document.getElementById("home").addEventListener("click", function (event) {
+    document.getElementById("home").addEventListener("click", function () {
       goHome();
     });
   }
@@ -430,11 +430,9 @@ const renderClickedMovie = function (movie) {
     </div>
           `
   );
-  document
-    .getElementById("return-home")
-    .addEventListener("click", function (event) {
-      goHome();
-    });
+  document.getElementById("return-home").addEventListener("click", function () {
+    goHome();
+  });
 };
 
 ////////////////////////////////////////////////////////

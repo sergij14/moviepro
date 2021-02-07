@@ -12375,7 +12375,7 @@ var getMovies = /*#__PURE__*/function () {
             _context.t0 = _context["catch"](0);
             moviesTitle.textContent = _context.t0;
             moviesContainer.insertAdjacentHTML("beforeend", "<a id=\"home\" class=\"btn-home\" href=\"#\">Main Page</a>");
-            document.getElementById("home").addEventListener("click", function (event) {
+            document.getElementById("home").addEventListener("click", function () {
               goHome();
             });
 
@@ -12667,7 +12667,7 @@ var renderClickedMovie = function renderClickedMovie(movie) {
   moviesContainer.innerHTML = "";
   moviesTitle.textContent = "Movie Details: " + title;
   moviesContainer.insertAdjacentHTML("beforeend", "\n    <div class=\"movies__detail\">\n    <div class=\"movies__detail__img\">\n    <img src=\"".concat(imgPath + image, "\" />\n    </div>\n    <div class=\"movies__detail__info\">\n    <span class=\"movies__detail__genres mar-tb-05\">").concat(getGenres(genres), "</span>\n    <span class=\"movies__detail__date\">Release Date: <b>").concat(date, "</b></span>\n    <span class=\"movies__detail__vote mar-tb-05\">Votes: <b><font style=\"color:").concat(checkColor(vote), "\">").concat(vote, "</font></b></span>\n    <span class=\"movies__detail__runtime\">Rruntime: <b>").concat(runtime, "</b> Min</span>\n    <p class=\"movies__detail__plot mar-tb-1\"><b>Overview:</b></b><br>").concat(plot, "</p>\n\n    <a class=\"movies__detail__imdb-btn mar-tb-05\" target=\"_blank\" href=\"https://www.imdb.com/title/").concat(imdbID, "/\">View On IMDB</a>\n    \n    <p class=\"home-link mar-t-1\">or <a id=\"return-home\" href=\"#\"><b>Return Home</b></a></p>\n\n    </div>\n    </div>\n          "));
-  document.getElementById("return-home").addEventListener("click", function (event) {
+  document.getElementById("return-home").addEventListener("click", function () {
     goHome();
   });
 }; ////////////////////////////////////////////////////////
@@ -12744,7 +12744,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55995" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56228" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
