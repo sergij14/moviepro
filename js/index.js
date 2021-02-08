@@ -8,9 +8,9 @@ import "regenerator-runtime/runtime";
 import "core-js/stable";
 
 ////////////////////////////////////////////////////////
-// API Urls
+// Urls
 ////////////////////////////////////////////////////////
-const apiUrl =
+const popularMoviesUrl =
   "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=53d1126a0f1a18cf2551da1519c821af&page=1";
 const imgPath = "https://image.tmdb.org/t/p/w500";
 const searchUrl =
@@ -202,7 +202,7 @@ const loadMsg = () => {
 
 const goHome = () => {
   event.preventDefault();
-  getMovies(apiUrl);
+  getMovies(popularMoviesUrl);
   moviesTitle.textContent = "Popular Movies";
   window.scroll(0, 0);
 };
@@ -479,6 +479,6 @@ searchForm.addEventListener("submit", (event) => {
 ////////////////////////////////////////////////////////
 loadMsg();
 window.addEventListener("DOMContentLoaded", () => {
-  getMovies(apiUrl);
+  getMovies(popularMoviesUrl);
   getFavItems();
 });

@@ -12266,9 +12266,9 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 ////////////////////////////////////////////////////////
-// API Urls
+// Urls
 ////////////////////////////////////////////////////////
-var apiUrl = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=53d1126a0f1a18cf2551da1519c821af&page=1";
+var popularMoviesUrl = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=53d1126a0f1a18cf2551da1519c821af&page=1";
 var imgPath = "https://image.tmdb.org/t/p/w500";
 var searchUrl = "https://api.themoviedb.org/3/search/movie?api_key=53d1126a0f1a18cf2551da1519c821af&query=";
 var dramaMoviesUrl = "https://api.themoviedb.org/3/discover/movie?with_genres=18&sort_by=popularity.desc&api_key=53d1126a0f1a18cf2551da1519c821af&page=1";
@@ -12431,7 +12431,7 @@ var loadMsg = function loadMsg() {
 
 var goHome = function goHome() {
   event.preventDefault();
-  getMovies(apiUrl);
+  getMovies(popularMoviesUrl);
   moviesTitle.textContent = "Popular Movies";
   window.scroll(0, 0);
 }; ////////////////////////////////////////////////////////
@@ -12713,7 +12713,7 @@ searchForm.addEventListener("submit", function (event) {
 
 loadMsg();
 window.addEventListener("DOMContentLoaded", function () {
-  getMovies(apiUrl);
+  getMovies(popularMoviesUrl);
   getFavItems();
 });
 },{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","core-js/stable":"node_modules/core-js/stable/index.js"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -12744,7 +12744,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56228" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59511" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
